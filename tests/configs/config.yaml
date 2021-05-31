@@ -1,0 +1,21 @@
+# Service 1
+service1:
+  default:
+    string1: string1
+    string2: 'string2'
+    string3: "string3"
+    int: 123
+    float: 1.5
+    'true': True
+    'false': False
+    'null': Null
+    array: [True, False, Null, string, 123, 1.5]
+  other:
+    quot: "quot\"1\"23"
+    apos: "apos'4'56"
+    mix: "null 123 \\"
+
+# Service 2
+service2:
+  default:
+    array: ['True', "False", 'Null', 'string', "123", '1.5']
