@@ -23,6 +23,9 @@ class DatabaseParser extends Parser
 
 	protected static function checkConfig(mixed $config) : void
 	{
+		if ( ! \is_array($config)) {
+			throw new LogicException(__CLASS__ . ' config must be an array');
+		}
 		if ( ! isset($config['user'])) {
 			throw new LogicException('Config user not set');
 		}

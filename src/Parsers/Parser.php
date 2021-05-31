@@ -17,6 +17,9 @@ abstract class Parser
 
 	protected static function checkConfig(mixed $config) : void
 	{
+		if ( ! \is_string($config)) {
+			throw new LogicException(__CLASS__ . ' config must be a string');
+		}
 		$file = \realpath($config);
 		if ($file === false || ! \is_file($file)) {
 			throw new LogicException('File not found: ' . $config);
