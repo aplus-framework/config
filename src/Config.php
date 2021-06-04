@@ -7,11 +7,16 @@ class Config
 	protected array $configs = [];
 	protected string $configsDir;
 	protected array $persistence = [];
+	protected string $suffix;
 
-	public function __construct(string $directory, array $persistence = [])
-	{
+	public function __construct(
+		string $directory,
+		array $persistence = [],
+		string $suffix = '.config.php'
+	) {
 		$this->setDir($directory);
 		$this->setPersistence($persistence);
+		$this->suffix = $suffix;
 	}
 
 	protected function setPersistence(array $configs) : void
@@ -84,7 +89,7 @@ class Config
 
 	public function load(string $name) : void
 	{
-		$filename = $this->configsDir . $name . '.config.php';
+		$filename = $this->configsDir . $name . $this->suffix;
 		$filename = \realpath($filename);
 		if ($filename === false || ! \is_file($filename)) {
 			throw new LogicException('Config file not found: ' . $name);
