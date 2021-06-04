@@ -19,7 +19,8 @@
 	],
 	"require": {
 		"php": ">=8.0",
-		"ext-yaml": "*"
+		"ext-yaml": "*",
+		"natanfelles/database": "^2.4"
 	},
 	"require-dev": {
 		"ext-xdebug": "*",
