@@ -7,7 +7,7 @@ abstract class ParserTestCase extends TestCase
 	protected mixed $config;
 	protected string $parserClass;
 
-	public function testParse()
+	public function testParse() : void
 	{
 		$this->assertEquals([
 			'service1' => [

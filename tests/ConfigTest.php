@@ -12,21 +12,21 @@ class ConfigTest extends TestCase
 		$this->config = new Config(__DIR__ . '/configs');
 	}
 
-	public function testLoadException()
+	public function testLoadException() : void
 	{
 		$this->expectException(\LogicException::class);
 		$this->expectExceptionMessage('Config file not found: bazz');
 		$this->config->load('bazz');
 	}
 
-	public function testSetDirException()
+	public function testSetDirException() : void
 	{
 		$this->expectException(\LogicException::class);
 		$this->expectExceptionMessage('Config directory not found: ' . __DIR__ . '/unknown');
 		(new Config(__DIR__ . '/unknown'));
 	}
 
-	public function testGetAll()
+	public function testGetAll() : void
 	{
 		$this->assertEquals([], $this->config->getAll());
 		$this->config->load('bar');
@@ -49,7 +49,7 @@ class ConfigTest extends TestCase
 		], $this->config->getAll());
 	}
 
-	public function testAdd()
+	public function testAdd() : void
 	{
 		$this->config->add('foo', ['baz']);
 		$this->assertEquals(['baz'], $this->config->get('foo'));

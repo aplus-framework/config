@@ -27,7 +27,7 @@ class DatabaseParserTest extends ParserTestCase
 		$database = new Database($this->config);
 		$database->dropTable($this->config['table'])->ifExists()->run();
 		$database->createTable($this->config['table'])
-			->definition(static function (TableDefinition $definition) {
+			->definition(static function (TableDefinition $definition) : void {
 				$definition->column('key')->varchar(255)->primaryKey();
 				$definition->column('value')->varchar(255);
 			})->run();
