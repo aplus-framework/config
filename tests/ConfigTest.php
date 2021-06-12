@@ -3,7 +3,7 @@
 use Framework\Config\Config;
 use PHPUnit\Framework\TestCase;
 
-class ConfigTest extends TestCase
+final class ConfigTest extends TestCase
 {
 	protected Config $config;
 

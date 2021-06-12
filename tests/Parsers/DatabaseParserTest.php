@@ -4,7 +4,7 @@ use Framework\Config\Parsers\DatabaseParser;
 use Framework\Database\Database;
 use Framework\Database\Definition\Table\TableDefinition;
 
-class DatabaseParserTest extends ParserTestCase
+final class DatabaseParserTest extends ParserTestCase
 {
 	protected mixed $config;
 	protected string $parserClass = DatabaseParser::class;
