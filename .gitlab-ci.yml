@@ -7,6 +7,11 @@ test:php:
     paths:
       - build/
       - vendor/
+  services:
+    - mariadb
+  variables:
+    MYSQL_DATABASE: framework-tests
+    MYSQL_ROOT_PASSWORD: password
   before_script:
     - mkdir -p build
     - composer install

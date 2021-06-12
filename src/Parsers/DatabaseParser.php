@@ -26,8 +26,8 @@ class DatabaseParser extends Parser
 		if ( ! \is_array($config)) {
 			throw new LogicException(__CLASS__ . ' config must be an array');
 		}
-		if ( ! isset($config['user'])) {
-			throw new LogicException('Config user not set');
+		if ( ! isset($config['username'])) {
+			throw new LogicException('Config username not set');
 		}
 		if ( ! isset($config['schema'])) {
 			throw new LogicException('Config schema not set');
