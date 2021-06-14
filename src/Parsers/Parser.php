@@ -2,6 +2,9 @@
 
 use LogicException;
 
+/**
+ * Class Parser.
+ */
 abstract class Parser
 {
 	/**
@@ -9,12 +12,19 @@ abstract class Parser
 	 *
 	 * @param mixed $config
 	 *
-	 * @throws \LogicException if config has error
+	 * @throws LogicException if config has error
 	 *
-	 * @return array|false Array on success, otherwise false
+	 * @return array<int|string,mixed>|false Array on success, otherwise false
 	 */
 	abstract public static function parse(mixed $config) : array | false;
 
+	/**
+	 * Check for config issues.
+	 *
+	 * @param mixed $config The parser configuration
+	 *
+	 * @throws LogicException if config is invalid
+	 */
 	protected static function checkConfig(mixed $config) : void
 	{
 		if ( ! \is_string($config)) {
@@ -26,6 +36,13 @@ abstract class Parser
 		}
 	}
 
+	/**
+	 * Recursively adds childs to an array tree.
+	 *
+	 * @param array<int|string,mixed> $parent The main array, where the childs will be added
+	 * @param array<int|string,mixed> $childs Childs to add
+	 * @param mixed $value The last child value
+	 */
 	protected static function addChild(array &$parent, array $childs, mixed $value) : void
 	{
 		$key = \array_shift($childs);
@@ -37,6 +54,13 @@ abstract class Parser
 		static::addChild($parent[$key], $childs, $value);
 	}
 
+	/**
+	 * Interprets a string value and returns it with a PHP type.
+	 *
+	 * @param string $value The input value
+	 *
+	 * @return array<int|string,mixed>|bool|float|int|string|null The output value
+	 */
 	protected static function getValue(string $value) : array | bool | int | float | string | null
 	{
 		$value = \trim($value);

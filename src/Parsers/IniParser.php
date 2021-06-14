@@ -1,11 +1,17 @@
 <?php namespace Framework\Config\Parsers;
 
+/**
+ * Class IniParser.
+ */
 class IniParser extends Parser
 {
 	public static function parse(mixed $config) : array | false
 	{
 		static::checkConfig($config);
 		$parsed = \parse_ini_file($config, true, \INI_SCANNER_TYPED);
+		if ($parsed === false) {
+			return false;
+		}
 		$data = [];
 		foreach ($parsed as $section => $values) {
 			$data[$section] = [];

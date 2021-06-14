@@ -3,6 +3,9 @@
 use Framework\Database\Database;
 use LogicException;
 
+/**
+ * Class DatabaseParser.
+ */
 class DatabaseParser extends Parser
 {
 	public static function parse(mixed $config) : array | false
