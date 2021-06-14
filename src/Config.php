@@ -63,7 +63,7 @@ class Config
 	 * @param string $name The service name
 	 * @param string $instance The service instance
 	 *
-	 * @return array The service instance custom configs with persistent configs
+	 * @return array<int|string,mixed> The service instance custom configs with persistent configs
 	 */
 	protected function getPersistentConfigs(string $name, string $instance) : array
 	{
