@@ -58,6 +58,20 @@ class Config
 	}
 
 	/**
+	 * Get configs with persistence.
+	 *
+	 * @param string $name The service name
+	 * @param string $instance The service instance
+	 *
+	 * @return array The service instance custom configs with persistent configs
+	 */
+	protected function getPersistentConfigs(string $name, string $instance) : array
+	{
+		$this->replacePersistence();
+		return $this->configs[$name][$instance] ?? [];
+	}
+
+	/**
 	 * Set configs to a service instance.
 	 *
 	 * NOTE: This configs will replace an existing instance (except persistent).
@@ -74,8 +88,7 @@ class Config
 		string $instance = 'default'
 	) : array {
 		$this->configs[$name][$instance] = $configs;
-		$this->replacePersistence();
-		return $this->configs[$name][$instance];
+		return $this->getPersistentConfigs($name, $instance);
 	}
 
 	/**
@@ -113,11 +126,9 @@ class Config
 				$this->configs[$name][$instance],
 				$configs
 			);
-		} else {
-			$this->configs[$name][$instance] = $configs;
+			return $this->getPersistentConfigs($name, $instance);
 		}
-		$this->replacePersistence();
-		return $this->configs[$name][$instance];
+		return $this->set($name, $configs, $instance);
 	}
 
 	/**
