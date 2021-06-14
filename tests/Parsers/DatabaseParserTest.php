@@ -32,6 +32,7 @@ final class DatabaseParserTest extends ParserTestCase
 				$definition->column('value')->varchar(255);
 			})->run();
 		$database->insert($this->config['table'])
+			->columns('key', 'value')
 			->values('service1.default.string1', 'string1')
 			->values('service1.default.string2', "'string2'")
 			->values('service1.default.string3', '"string3"')
