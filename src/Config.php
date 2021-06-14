@@ -29,7 +29,7 @@ class Config
 	public function __construct(
 		string $directory,
 		array $persistence = [],
-		string $suffix = '.config.php'
+		string $suffix = '.php'
 	) {
 		$this->setDir($directory);
 		$this->setPersistence($persistence);

@@ -9,7 +9,7 @@ final class ConfigTest extends TestCase
 
 	protected function setUp() : void
 	{
-		$this->config = new Config(__DIR__ . '/configs');
+		$this->config = new Config(__DIR__ . '/configs', [], '.config.php');
 	}
 
 	public function testLoadException() : void
