@@ -183,7 +183,7 @@ class Config
 		if ($filename === false || ! \is_file($filename)) {
 			throw new LogicException('Config file not found: ' . $name);
 		}
-		$configs = require $filename;
+		$configs = require_isolated($filename);
 		$this->setMany([$name => $configs]);
 	}
 }

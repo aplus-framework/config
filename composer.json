@@ -20,7 +20,8 @@
 	"require": {
 		"php": ">=8.0",
 		"ext-yaml": "*",
-		"natanfelles/database": "^2.4"
+		"natanfelles/database": "^2.4",
+		"natanfelles/isolation": "^1.0"
 	},
 	"require-dev": {
 		"ext-xdebug": "*",
