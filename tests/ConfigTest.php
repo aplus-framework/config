@@ -28,16 +28,16 @@ final class ConfigTest extends TestCase
 
 	public function testGetAll() : void
 	{
-		$this->assertEquals([], $this->config->getAll());
+		self::assertSame([], $this->config->getAll());
 		$this->config->load('bar');
-		$this->assertEquals([
+		self::assertSame([
 			'bar' => [
 				'default' => [
 				],
 			],
 		], $this->config->getAll());
 		$this->config->load('foo');
-		$this->assertEquals([
+		self::assertSame([
 			'bar' => [
 				'default' => [
 				],
@@ -52,10 +52,10 @@ final class ConfigTest extends TestCase
 	public function testAdd() : void
 	{
 		$this->config->add('foo', ['baz']);
-		$this->assertEquals(['baz'], $this->config->get('foo'));
+		self::assertSame(['baz'], $this->config->get('foo'));
 		$this->config->set('foo', ['bar']);
-		$this->assertEquals(['bar'], $this->config->get('foo'));
+		self::assertSame(['bar'], $this->config->get('foo'));
 		$this->config->add('foo', ['baz', 'hi']);
-		$this->assertEquals(['baz', 'hi'], $this->config->get('foo'));
+		self::assertSame(['baz', 'hi'], $this->config->get('foo'));
 	}
 }

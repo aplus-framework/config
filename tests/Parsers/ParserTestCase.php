@@ -9,7 +9,7 @@ abstract class ParserTestCase extends TestCase
 
 	public function testParse() : void
 	{
-		$this->assertEquals([
+		self::assertSame([
 			'service1' => [
 				'default' => [
 					'string1' => 'string1',
