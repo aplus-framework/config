@@ -11,17 +11,17 @@ commands=(
 	"phpdoc"
 )
 
-color_default=$(tput sgr0)
-color_green=$(tput setaf 2)
-color_red=$(tput setaf 1)
+color_default='\033[0m'
+color_green='\033[1;32m'
+color_red='\033[1;31m'
 
 for command in "${commands[@]}"; do
-	echo "${color_green}$ ${command}${color_default}"
+	echo -e "${color_green}$ ${command}${color_default}"
 	if ! eval "${command}"; then
-		echo "${color_red}ERROR: Test failed${color_default}"
+		echo -e "${color_red}ERROR: Test failed${color_default}"
 		exit
 	fi
 done
 
 echo
-echo "${color_green}Test succeeded${color_default}"
+echo -e "${color_green}Test succeeded${color_default}"
