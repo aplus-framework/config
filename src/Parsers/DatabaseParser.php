@@ -12,7 +12,11 @@ class DatabaseParser extends Parser
 	{
 		static::checkConfig($config);
 		$db = new Database($config);
-		$results = $db->select()->from($config['table'])->run()->fetchArrayAll();
+		$results = $db->select()
+			->from($config['table'])
+			->orderBy('key')
+			->run()
+			->fetchArrayAll();
 		$data = [];
 		foreach ($results as $row) {
 			$key = \explode('.', $row['key']);

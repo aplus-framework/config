@@ -25,6 +25,6 @@ class IniParser extends Parser
 				);
 			}
 		}
-		return $data;
+		return static::ksortRecursive($data);
 	}
 }

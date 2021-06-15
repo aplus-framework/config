@@ -89,4 +89,23 @@ abstract class Parser
 		}
 		return $value;
 	}
+
+	/**
+	 * Sort arrays by keys recursively.
+	 *
+	 * @param mixed $value The input value
+	 *
+	 * @return mixed The output value (sorted by keys if the $value is an array)
+	 */
+	protected static function ksortRecursive(mixed $value) : mixed
+	{
+		if ( ! \is_array($value)) {
+			return $value;
+		}
+		\ksort($value);
+		foreach ($value as &$val) {
+			$val = static::ksortRecursive($val);
+		}
+		return $value;
+	}
 }

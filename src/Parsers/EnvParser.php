@@ -27,6 +27,6 @@ class EnvParser extends Parser
 			static::addChild($parent, $key, $value);
 			$data = \array_replace_recursive($data, $parent);
 		}
-		return $data;
+		return static::ksortRecursive($data);
 	}
 }

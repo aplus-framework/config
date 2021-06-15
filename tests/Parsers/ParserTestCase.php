@@ -12,14 +12,6 @@ abstract class ParserTestCase extends TestCase
 		self::assertSame([
 			'service1' => [
 				'default' => [
-					'string1' => 'string1',
-					'string2' => 'string2',
-					'string3' => 'string3',
-					'int' => 123,
-					'float' => 1.5,
-					'true' => true,
-					'false' => false,
-					'null' => null,
 					'array' => [
 						0 => true,
 						1 => false,
@@ -28,11 +20,19 @@ abstract class ParserTestCase extends TestCase
 						4 => 123,
 						5 => 1.5,
 					],
+					'false' => false,
+					'float' => 1.5,
+					'int' => 123,
+					'null' => null,
+					'string1' => 'string1',
+					'string2' => 'string2',
+					'string3' => 'string3',
+					'true' => true,
 				],
 				'other' => [
-					'quot' => 'quot"1"23',
 					'apos' => "apos'4'56",
 					'mix' => 'null 123 \\',
+					'quot' => 'quot"1"23',
 				],
 			],
 			'service2' => [
