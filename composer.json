@@ -14,19 +14,20 @@
 	"authors": [
 		{
 			"name": "Natan Felles",
-			"email": "natanfelles@gmail.com"
+			"email": "natanfelles@gmail.com",
+			"homepage": "https://natanfelles.github.io"
 		}
 	],
 	"require": {
 		"php": ">=8.0",
 		"ext-yaml": "*",
-		"natanfelles/database": "^2.4",
+		"natanfelles/database": "^2.5",
 		"natanfelles/isolation": "^1.0"
 	},
 	"require-dev": {
 		"ext-xdebug": "*",
-		"ergebnis/composer-normalize": "^2.13",
-		"natanfelles/coding-standard": "^1.5",
+		"ergebnis/composer-normalize": "^2.15",
+		"natanfelles/coding-standard": "^1.7",
 		"phpmd/phpmd": "^2.10",
 		"phpstan/phpstan": "^0.12",
 		"phpunit/phpunit": "^9.5"
