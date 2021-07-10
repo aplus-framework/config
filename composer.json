@@ -22,7 +22,7 @@
 		"php": ">=8.0",
 		"ext-yaml": "*",
 		"natanfelles/database": "^2.5",
-		"natanfelles/isolation": "^1.0"
+		"natanfelles/helpers": "^2.1"
 	},
 	"require-dev": {
 		"ext-xdebug": "*",

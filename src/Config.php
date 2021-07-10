@@ -9,6 +9,7 @@
  */
 namespace Framework\Config;
 
+use Framework\Helpers\Isolation;
 use LogicException;
 
 /**
@@ -192,7 +193,7 @@ class Config
 		if ($filename === false || ! \is_file($filename)) {
 			throw new LogicException('Config file not found: ' . $name);
 		}
-		$configs = require_isolated($filename);
+		$configs = Isolation::require($filename);
 		$this->setMany([$name => $configs]);
 	}
 }
