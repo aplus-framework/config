@@ -1,4 +1,4 @@
-# The Framework Config Library
+# Aplus Framework Config Library
 
 - [Homepage](https://the-framework.gitlab.io/libraries/config.html)
 - [API Documentation](https://the-framework.gitlab.io/libraries/config/docs/)
