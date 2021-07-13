@@ -1,7 +1,7 @@
 {
-    "name": "natanfelles/config",
+    "name": "aplus/config",
     "type": "library",
-    "description": "The Framework Config Library",
+    "description": "Aplus Framework Config Library",
     "keywords": [
         "config",
         "env",
@@ -9,7 +9,7 @@
         "yaml",
         "database"
     ],
-    "homepage": "https://the-framework.gitlab.io/libraries/config.html",
+    "homepage": "https://aplus-framework.com/docs/config",
     "license": "MIT",
     "authors": [
         {
@@ -52,9 +52,9 @@
     "prefer-stable": true,
     "support": {
         "email": "natanfelles@gmail.com",
-        "issues": "https://gitlab.com/the-framework/libraries/config/issues",
-        "wiki": "https://gitlab.com/the-framework/libraries/config/wikis/home",
-        "source": "https://gitlab.com/the-framework/libraries/config",
-        "docs": "https://the-framework.gitlab.io/libraries/config/docs/"
+        "issues": "https://gitlab.com/aplus-framework/libraries/config/issues",
+        "wiki": "https://gitlab.com/aplus-framework/libraries/config/wikis/home",
+        "source": "https://gitlab.com/aplus-framework/libraries/config",
+        "docs": "https://aplus-framework.gitlab.io/libraries/config/docs/"
     }
 }
