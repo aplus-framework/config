@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of The Framework Config Library.
+ * This file is part of Aplus Framework Config Library.
  *
  * (c) Natan Felles <natanfelles@gmail.com>
  *
