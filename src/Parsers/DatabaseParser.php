@@ -20,8 +20,8 @@ class DatabaseParser extends Parser
     public static function parse(mixed $config) : array | false
     {
         static::checkConfig($config);
-        $db = new Database($config);
-        $results = $db->select()
+        $database = new Database($config);
+        $results = $database->select()
             ->from($config['table'])
             ->orderBy('key')
             ->run()

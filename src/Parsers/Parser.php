@@ -75,14 +75,14 @@ abstract class Parser
     protected static function getValue(string $value) : array | bool | int | float | string | null
     {
         $value = \trim($value);
-        $lower_value = \strtolower($value);
-        if ($lower_value === 'true') {
+        $lowerValue = \strtolower($value);
+        if ($lowerValue === 'true') {
             return true;
         }
-        if ($lower_value === 'false') {
+        if ($lowerValue === 'false') {
             return false;
         }
-        if ($lower_value === 'null') {
+        if ($lowerValue === 'null') {
             return null;
         }
         if (\is_numeric($value) && $value >= \PHP_INT_MIN && $value <= \PHP_INT_MAX) {
