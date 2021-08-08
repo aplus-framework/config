@@ -14,6 +14,8 @@ use LogicException;
 
 /**
  * Class Parser.
+ *
+ * @package config
  */
 abstract class Parser
 {

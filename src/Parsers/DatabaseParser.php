@@ -14,6 +14,8 @@ use LogicException;
 
 /**
  * Class DatabaseParser.
+ *
+ * @package config
  */
 class DatabaseParser extends Parser
 {

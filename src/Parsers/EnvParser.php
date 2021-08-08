@@ -11,6 +11,8 @@ namespace Framework\Config\Parsers;
 
 /**
  * Class EnvParser.
+ *
+ * @package config
  */
 class EnvParser extends Parser
 {

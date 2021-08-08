@@ -11,6 +11,8 @@ namespace Framework\Config\Parsers;
 
 /**
  * Class YamlParser.
+ *
+ * @package config
  */
 class YamlParser extends Parser
 {

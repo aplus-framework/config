@@ -14,6 +14,8 @@ use LogicException;
 
 /**
  * Class Config.
+ *
+ * @package config
  */
 class Config
 {

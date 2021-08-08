@@ -11,6 +11,8 @@ namespace Framework\Config\Parsers;
 
 /**
  * Class IniParser.
+ *
+ * @package config
  */
 class IniParser extends Parser
 {
