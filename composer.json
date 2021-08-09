@@ -9,7 +9,7 @@
         "yaml",
         "database"
     ],
-    "homepage": "https://aplus-framework.com/docs/config",
+    "homepage": "https://docs.aplus-framework.com/guides/libraries/config/",
     "license": "MIT",
     "authors": [
         {
@@ -55,6 +55,6 @@
         "issues": "https://gitlab.com/aplus-framework/libraries/config/issues",
         "wiki": "https://gitlab.com/aplus-framework/libraries/config/wikis/home",
         "source": "https://gitlab.com/aplus-framework/libraries/config",
-        "docs": "https://aplus-framework.gitlab.io/libraries/config/docs/"
+        "docs": "https://docs.aplus-framework.com/guides/libraries/config/"
     }
 }
