@@ -39,6 +39,25 @@ final class ConfigTest extends TestCase
         (new Config(__DIR__ . '/unknown'));
     }
 
+    public function testGet() : void
+    {
+        self::assertSame([], $this->config->get('foo'));
+        self::assertSame(['one' => 1], $this->config->get('bar'));
+        $this->expectException(\LogicException::class);
+        $this->expectExceptionMessage('Config file not found: skavurska');
+        $this->config->get('skavurska');
+    }
+
+    public function testGetWithConfigDirNotSet() : void
+    {
+        $this->config = new Config();
+        self::assertNull($this->config->get('foo'));
+        self::assertNull($this->config->get('bar'));
+        self::assertNull($this->config->get('skavurska'));
+        $this->config->set('foo', []);
+        self::assertSame([], $this->config->get('foo'));
+    }
+
     public function testGetAll() : void
     {
         self::assertSame([], $this->config->getAll());
@@ -46,6 +65,7 @@ final class ConfigTest extends TestCase
         self::assertSame([
             'bar' => [
                 'default' => [
+                    'one' => 1,
                 ],
             ],
         ], $this->config->getAll());
@@ -53,6 +73,7 @@ final class ConfigTest extends TestCase
         self::assertSame([
             'bar' => [
                 'default' => [
+                    'one' => 1,
                 ],
             ],
             'foo' => [
@@ -91,6 +112,7 @@ final class ConfigTest extends TestCase
         self::assertSame([
             'bar' => [
                 'default' => [
+                    'one' => 1,
                 ],
                 'custom' => [
                 ],
@@ -105,6 +127,7 @@ final class ConfigTest extends TestCase
         self::assertSame([
             'bar' => [
                 'default' => [
+                    'one' => 1,
                 ],
                 'custom' => [
                 ],
@@ -120,6 +143,7 @@ final class ConfigTest extends TestCase
         self::assertSame([
             'bar' => [
                 'default' => [
+                    'one' => 1,
                 ],
                 'custom' => [
                 ],

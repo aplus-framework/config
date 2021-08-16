@@ -33,17 +33,19 @@ class Config
     /**
      * Config constructor.
      *
-     * @param string $directory The configs base directory
+     * @param string|null $directory The configs base directory
      * @param array<string,mixed> $persistence Configs that always will overwrite
      * custom added, loaded or set configs
      * @param string $suffix The services filenames suffix
      */
     public function __construct(
-        string $directory,
+        string $directory = null,
         array $persistence = [],
         string $suffix = '.php'
     ) {
-        $this->setDir($directory);
+        if ($directory !== null) {
+            $this->setDir($directory);
+        }
         $this->setPersistence($persistence);
         $this->suffix = $suffix;
     }
@@ -114,7 +116,7 @@ class Config
      */
     public function get(string $name, string $instance = 'default') : ?array
     {
-        if (empty($this->configs[$name])) {
+        if (empty($this->configs[$name]) && isset($this->configsDir)) {
             $this->load($name);
         }
         return $this->configs[$name][$instance] ?? null;
