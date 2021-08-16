@@ -34,7 +34,7 @@ class Config
      * Config constructor.
      *
      * @param string|null $directory The configs base directory
-     * @param array<string,mixed> $persistence Configs that always will overwrite
+     * @param array<string,mixed> $persistence Configs that will always overwrite
      * custom added, loaded or set configs
      * @param string $suffix The services filenames suffix
      */
@@ -77,7 +77,8 @@ class Config
      * @param string $name The service name
      * @param string $instance The service instance
      *
-     * @return array<int|string,mixed> The service instance custom configs with persistent configs
+     * @return array<int|string,mixed> The service instance custom configs with
+     * persistent configs
      */
     protected function getPersistentConfigs(string $name, string $instance) : array
     {
@@ -88,7 +89,7 @@ class Config
     /**
      * Set configs to a service instance.
      *
-     * NOTE: This configs will replace an existing instance (except persistent).
+     * NOTE: These configs will replace an existing instance (except persistence).
      *
      * @param string $name The service name
      * @param array<int|string,mixed> $configs The new configs
@@ -110,6 +111,9 @@ class Config
      *
      * @param string $name The service name
      * @param string $instance The service instance
+     *
+     * @throws LogicException If the service configs are empty and the Config
+     * directory is set, and the config file is not found
      *
      * @return array<int|string,mixed>|null The instance configs as array or null
      * if is not set
@@ -148,7 +152,7 @@ class Config
     /**
      * Set many configs in one call.
      *
-     * NOTE: This configs will replace existing instances.
+     * NOTE: The $configs will replace existing instances (except persistence).
      *
      * @param array<string,mixed> $configs
      */
@@ -175,6 +179,8 @@ class Config
      * Set the base directory.
      *
      * @param string $directory Directory path
+     *
+     * @throws LogicException If the config directory is not found
      */
     protected function setDir(string $directory) : void
     {
@@ -189,6 +195,8 @@ class Config
      * Loads a config file.
      *
      * @param string $name the file name without the directory path and the suffix
+     *
+     * @throws LogicException If the config file is not found
      */
     public function load(string $name) : void
     {
