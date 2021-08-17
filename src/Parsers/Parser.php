@@ -46,6 +46,9 @@ abstract class Parser
         if ($file === false || ! \is_file($file)) {
             throw new LogicException('File not found: ' . $config);
         }
+        if ( ! \is_readable($file)) {
+            throw new LogicException('File is not readable: ' . $config);
+        }
     }
 
     /**
