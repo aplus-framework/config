@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<config>
+    <!-- Service 1 -->
+    <service1>
+        <default>
+            <string1>string1</string1>
+            <string2>string2</string2>
+            <string3>string3</string3>
+            <int>123</int>
+            <float>1.5</float>
+            <true>true</true>
+            <false>false</false>
+            <null>null</null>
+            <array>true</array>
+            <array>false</array>
+            <array>null</array>
+            <array>string</array>
+            <array>123</array>
+            <array>1.5</array>
+        </default>
+        <other>
+            <quot>quot"1"23</quot>
+            <apos>apos'4'56</apos>
+            <mix>null 123 \</mix>
+        </other>
+    </service1>
+
+    <!-- Service 2 -->
+    <service2>
+        <default>
+            <array>'True'</array>
+            <array>'False'</array>
+            <array>'Null'</array>
+            <array>'string'</array>
+            <array>'123'</array>
+            <array>'1.5'</array>
+        </default>
+    </service2>
+</config>

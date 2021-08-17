@@ -20,6 +20,7 @@
     ],
     "require": {
         "php": ">=8.0",
+        "ext-simplexml": "*",
         "ext-yaml": "*",
         "aplus/database": "^2.8",
         "aplus/helpers": "^2.2"
