@@ -10,6 +10,7 @@
 namespace Tests\Config\Parsers;
 
 use Framework\Config\Parsers\DatabaseParser;
+use Framework\Config\Parsers\ParserException;
 use Framework\Database\Database;
 use Framework\Database\Definition\Table\TableDefinition;
 
@@ -70,7 +71,7 @@ final class DatabaseParserTest extends ParserTestCase
 
     public function testConfigIsNotArray() : void
     {
-        $this->expectException(\LogicException::class);
+        $this->expectException(ParserException::class);
         $this->expectExceptionMessage(
             DatabaseParser::class . ' config must be an array'
         );
@@ -79,8 +80,10 @@ final class DatabaseParserTest extends ParserTestCase
 
     public function testConfigUsernameNotSet() : void
     {
-        $this->expectException(\LogicException::class);
-        $this->expectExceptionMessage('Config username not set');
+        $this->expectException(ParserException::class);
+        $this->expectExceptionMessage(
+            DatabaseParser::class . ' config username not set'
+        );
         DatabaseParser::parse([
             'user' => 'foo',
         ]);
@@ -88,8 +91,10 @@ final class DatabaseParserTest extends ParserTestCase
 
     public function testConfigSchemaNotSet() : void
     {
-        $this->expectException(\LogicException::class);
-        $this->expectExceptionMessage('Config schema not set');
+        $this->expectException(ParserException::class);
+        $this->expectExceptionMessage(
+            DatabaseParser::class . ' config schema not set'
+        );
         DatabaseParser::parse([
             'username' => 'foo',
         ]);
@@ -97,11 +102,28 @@ final class DatabaseParserTest extends ParserTestCase
 
     public function testConfigTableNotSet() : void
     {
-        $this->expectException(\LogicException::class);
-        $this->expectExceptionMessage('Config table not set');
+        $this->expectException(ParserException::class);
+        $this->expectExceptionMessage(
+            DatabaseParser::class . ' config table not set'
+        );
         DatabaseParser::parse([
             'username' => 'foo',
-            'schema' => 'configs',
+            'schema' => 'app',
+        ]);
+    }
+
+    public function testParseException() : void
+    {
+        $this->expectException(ParserException::class);
+        $this->expectExceptionMessageMatches(
+            '#^' . \strtr(DatabaseParser::class, ['\\' => '\\\\']) . ': Access denied for user +#'
+        );
+        DatabaseParser::parse([
+            'host' => \getenv('DB_HOST'),
+            'port' => \getenv('DB_PORT'),
+            'username' => 'foo',
+            'schema' => 'app',
+            'table' => 'configs',
         ]);
     }
 }

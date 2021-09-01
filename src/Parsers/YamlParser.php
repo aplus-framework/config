@@ -16,10 +16,12 @@ namespace Framework\Config\Parsers;
  */
 class YamlParser extends Parser
 {
-    public static function parse(mixed $config) : array | false
+    public static function parse(mixed $config) : array
     {
         static::checkConfig($config);
-        $data = \yaml_parse_file($config);
-        return static::ksortRecursive($data);
+        return static::parseOrThrow(static function () use ($config) : array {
+            $data = \yaml_parse_file($config);
+            return static::ksortRecursive($data);
+        });
     }
 }

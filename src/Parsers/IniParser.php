@@ -16,26 +16,26 @@ namespace Framework\Config\Parsers;
  */
 class IniParser extends Parser
 {
-    public static function parse(mixed $config) : array | false
+    public static function parse(mixed $config) : array
     {
         static::checkConfig($config);
-        $parsed = \parse_ini_file($config, true, \INI_SCANNER_TYPED);
-        if ($parsed === false) {
-            return false;
-        }
-        $data = [];
-        foreach ($parsed as $section => $values) {
-            $data[$section] = [];
-            foreach ($values as $key => $value) {
-                $key = \explode('.', $key);
-                $parent = [];
-                static::addChild($parent, $key, $value);
-                $data[$section] = \array_replace_recursive(
-                    $data[$section],
-                    $parent
-                );
+        return static::parseOrThrow(static function () use ($config) : array {
+            $parsed = \parse_ini_file($config, true, \INI_SCANNER_TYPED);
+            $data = [];
+            // @phpstan-ignore-next-line
+            foreach ($parsed as $section => $values) {
+                $data[$section] = [];
+                foreach ($values as $key => $value) {
+                    $key = \explode('.', $key);
+                    $parent = [];
+                    static::addChild($parent, $key, $value);
+                    $data[$section] = \array_replace_recursive(
+                        $data[$section],
+                        $parent
+                    );
+                }
             }
-        }
-        return static::ksortRecursive($data);
+            return static::ksortRecursive($data);
+        });
     }
 }

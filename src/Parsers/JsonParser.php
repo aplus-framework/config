@@ -16,11 +16,23 @@ namespace Framework\Config\Parsers;
  */
 class JsonParser extends Parser
 {
-    public static function parse(mixed $config) : array | false
+    public static function parse(mixed $config) : array
     {
         static::checkConfig($config);
-        $config = \file_get_contents($config);
-        $data = \json_decode($config, true); // @phpstan-ignore-line
-        return static::ksortRecursive($data);
+        return static::parseOrThrow(static function () use ($config) : array {
+            $config = \file_get_contents($config);
+            try {
+                $data = \json_decode($config, true, 512, \JSON_THROW_ON_ERROR); // @phpstan-ignore-line
+            } catch (\Exception $exception) {
+                throw new ParserException(
+                    static::class . ': ' . $exception->getMessage(),
+                    $exception->getCode(),
+                    \E_ERROR,
+                    $exception->getFile(),
+                    $exception->getLine()
+                );
+            }
+            return static::ksortRecursive($data);
+        });
     }
 }

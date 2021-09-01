@@ -10,7 +10,6 @@
 namespace Framework\Config\Parsers;
 
 use Framework\Database\Database;
-use LogicException;
 
 /**
  * Class DatabaseParser.
@@ -19,39 +18,51 @@ use LogicException;
  */
 class DatabaseParser extends Parser
 {
-    public static function parse(mixed $config) : array | false
+    public static function parse(mixed $config) : array
     {
         static::checkConfig($config);
-        $database = new Database($config);
-        $results = $database->select()
-            ->from($config['table'])
-            ->orderBy('key')
-            ->run()
-            ->fetchArrayAll();
-        $data = [];
-        foreach ($results as $row) {
-            $key = \explode('.', $row['key']);
-            $value = static::getValue($row['value']);
-            $parent = [];
-            static::addChild($parent, $key, $value);
-            $data = \array_replace_recursive($data, $parent);
-        }
-        return $data;
+        return static::parseOrThrow(static function () use ($config) : array {
+            try {
+                $database = new Database($config);
+                $results = $database->select()
+                    ->from($config['table'])
+                    ->orderBy('key')
+                    ->run()
+                    ->fetchArrayAll();
+            } catch (\Exception $exception) {
+                throw new ParserException(
+                    static::class . ': ' . $exception->getMessage(),
+                    $exception->getCode(),
+                    \E_ERROR,
+                    $exception->getFile(),
+                    $exception->getLine()
+                );
+            }
+            $data = [];
+            foreach ($results as $row) {
+                $key = \explode('.', $row['key']);
+                $value = static::getValue($row['value']);
+                $parent = [];
+                static::addChild($parent, $key, $value);
+                $data = \array_replace_recursive($data, $parent);
+            }
+            return $data;
+        });
     }
 
     protected static function checkConfig(mixed $config) : void
     {
         if ( ! \is_array($config)) {
-            throw new LogicException(static::class . ' config must be an array');
+            throw new ParserException(static::class . ' config must be an array');
         }
         if ( ! isset($config['username'])) {
-            throw new LogicException('Config username not set');
+            throw new ParserException(static::class . ' config username not set');
         }
         if ( ! isset($config['schema'])) {
-            throw new LogicException('Config schema not set');
+            throw new ParserException(static::class . ' config schema not set');
         }
         if ( ! isset($config['table'])) {
-            throw new LogicException('Config table not set');
+            throw new ParserException(static::class . ' config table not set');
         }
     }
 }

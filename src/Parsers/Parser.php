@@ -9,8 +9,8 @@
  */
 namespace Framework\Config\Parsers;
 
+use Closure;
 use JetBrains\PhpStorm\Pure;
-use LogicException;
 
 /**
  * Class Parser.
@@ -24,30 +24,48 @@ abstract class Parser
      *
      * @param mixed $config
      *
-     * @throws LogicException if config has error
+     * @throws ParserException If config is invalid or data can not be parsed
      *
-     * @return array<int|string,mixed>|false Array on success, otherwise false
+     * @return array<int|string,mixed> The parsed configs
      */
-    abstract public static function parse(mixed $config) : array | false;
+    abstract public static function parse(mixed $config) : array;
+
+    /**
+     * @param Closure $function
+     *
+     * @throws ParserException If config data can not be parsed
+     *
+     * @return array<int|string,mixed>
+     */
+    protected static function parseOrThrow(Closure $function) : array
+    {
+        \set_error_handler(static function ($severity, $message, $file, $line) : void {
+            $message = static::class . ': ' . $message;
+            throw new ParserException($message, $severity, $severity, $file, $line);
+        });
+        $result = $function();
+        \restore_error_handler();
+        return $result;
+    }
 
     /**
      * Check for config issues.
      *
      * @param mixed $config The parser configuration
      *
-     * @throws LogicException if config is invalid
+     * @throws ParserException If config is invalid
      */
     protected static function checkConfig(mixed $config) : void
     {
         if ( ! \is_string($config)) {
-            throw new LogicException(static::class . ' config must be a string');
+            throw new ParserException(static::class . ' config must be a string');
         }
         $file = \realpath($config);
         if ($file === false || ! \is_file($file)) {
-            throw new LogicException('File not found: ' . $config);
+            throw new ParserException('File not found: ' . $config);
         }
         if ( ! \is_readable($file)) {
-            throw new LogicException('File is not readable: ' . $config);
+            throw new ParserException('File is not readable: ' . $config);
         }
     }
 
@@ -77,7 +95,7 @@ abstract class Parser
      * @return array<int|string,mixed>|bool|float|int|string|null The output value
      */
     #[Pure]
-    protected static function getValue(string $value) : array | bool | int | float | string | null
+    protected static function getValue(string $value) : array|bool|int|float|string|null
     {
         $value = \trim($value);
         $lowerValue = \strtolower($value);

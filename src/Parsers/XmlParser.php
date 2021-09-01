@@ -18,22 +18,24 @@ use Framework\Config\Parsers\Extra\JsonXMLElement;
  */
 class XmlParser extends Parser
 {
-    public static function parse(mixed $config) : array|false
+    public static function parse(mixed $config) : array
     {
         static::checkConfig($config);
-        $config = \file_get_contents($config);
-        $config = \simplexml_load_string($config, JsonXMLElement::class); // @phpstan-ignore-line
-        $config = \json_encode($config);
-        $config = \json_decode($config, true); // @phpstan-ignore-line
-        $data = [];
-        foreach ($config as $instance => $values) {
-            foreach ($values as &$value) {
-                $value = static::parseValue($value);
+        return static::parseOrThrow(static function () use ($config) : array {
+            $config = \file_get_contents($config);
+            $config = \simplexml_load_string($config, JsonXMLElement::class); // @phpstan-ignore-line
+            $config = \json_encode($config);
+            $config = \json_decode($config, true); // @phpstan-ignore-line
+            $data = [];
+            foreach ($config as $instance => $values) {
+                foreach ($values as &$value) {
+                    $value = static::parseValue($value);
+                }
+                unset($value);
+                $data[$instance] = $values;
             }
-            unset($value);
-            $data[$instance] = $values;
-        }
-        return static::ksortRecursive($data);
+            return static::ksortRecursive($data);
+        });
     }
 
     /**
