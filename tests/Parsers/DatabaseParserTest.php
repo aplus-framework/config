@@ -67,4 +67,41 @@ final class DatabaseParserTest extends ParserTestCase
             ->values('service2.default.array.5', "'1.5'")
             ->run();
     }
+
+    public function testConfigIsNotArray() : void
+    {
+        $this->expectException(\LogicException::class);
+        $this->expectExceptionMessage(
+            DatabaseParser::class . ' config must be an array'
+        );
+        DatabaseParser::parse(__FILE__);
+    }
+
+    public function testConfigUsernameNotSet() : void
+    {
+        $this->expectException(\LogicException::class);
+        $this->expectExceptionMessage('Config username not set');
+        DatabaseParser::parse([
+            'user' => 'foo',
+        ]);
+    }
+
+    public function testConfigSchemaNotSet() : void
+    {
+        $this->expectException(\LogicException::class);
+        $this->expectExceptionMessage('Config schema not set');
+        DatabaseParser::parse([
+            'username' => 'foo',
+        ]);
+    }
+
+    public function testConfigTableNotSet() : void
+    {
+        $this->expectException(\LogicException::class);
+        $this->expectExceptionMessage('Config table not set');
+        DatabaseParser::parse([
+            'username' => 'foo',
+            'schema' => 'configs',
+        ]);
+    }
 }
