@@ -131,6 +131,18 @@ class Config
     }
 
     /**
+     * Get service instances configs.
+     *
+     * @param string $name The service name
+     *
+     * @return array<string,array>|null The service instances configs
+     */
+    public function getInstances(string $name) : ?array
+    {
+        return $this->configs[$name] ?? null;
+    }
+
+    /**
      * Add configs to a service instance.
      *
      * NOTE: IF the service instance already exists, the configs will be merged

@@ -176,4 +176,28 @@ final class ConfigTest extends TestCase
             ],
         ], $this->config->getAll());
     }
+
+    public function testGetInstances() : void
+    {
+        $configs = [
+            'sv1' => [
+                'default' => [
+                    'one' => 1,
+                ],
+                'custom' => [
+                ],
+            ],
+            'sv2' => [
+                'default' => [
+                    'foo' => 'unchanged',
+                    'bar' => 42,
+                ],
+            ],
+        ];
+        self::assertNull($this->config->getInstances('sv1'));
+        self::assertNull($this->config->getInstances('sv2'));
+        $this->config->setMany($configs);
+        self::assertSame($configs['sv1'], $this->config->getInstances('sv1'));
+        self::assertSame($configs['sv2'], $this->config->getInstances('sv2'));
+    }
 }
