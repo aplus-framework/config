@@ -33,18 +33,22 @@ class Config
     /**
      * Config constructor.
      *
-     * @param string|null $directory The configs base directory
+     * @param array<string,mixed>|string|null $configs An array to set many
+     * configs, the config base directory or null
      * @param array<string,mixed> $persistence Configs that will always overwrite
      * custom added, loaded or set configs
-     * @param string $suffix The services filenames suffix
+     * @param string $suffix The services filenames suffix used when the config
+     * directory is set
      */
     public function __construct(
-        string $directory = null,
+        array | string $configs = null,
         array $persistence = [],
         string $suffix = '.php'
     ) {
-        if ($directory !== null) {
-            $this->setDir($directory);
+        if ($configs !== null) {
+            \is_array($configs)
+                ? $this->setMany($configs)
+                : $this->setDir($configs);
         }
         $this->setPersistence($persistence);
         $this->suffix = $suffix;

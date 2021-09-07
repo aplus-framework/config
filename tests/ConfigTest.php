@@ -58,6 +58,17 @@ final class ConfigTest extends TestCase
         self::assertSame([], $this->config->get('foo'));
     }
 
+    public function testGetAllWithConfigSetAsArray() : void
+    {
+        $configs = [
+            'foo' => [
+                'default' => [],
+            ],
+        ];
+        $this->config = new Config($configs);
+        self::assertSame($configs, $this->config->getAll());
+    }
+
     public function testGetAll() : void
     {
         self::assertSame([], $this->config->getAll());
