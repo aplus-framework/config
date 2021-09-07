@@ -25,6 +25,15 @@ final class ConfigTest extends TestCase
         $this->config = new Config(__DIR__ . '/configs', $this->persistence, '.config.php');
     }
 
+    public function testGetAndSetDir() : void
+    {
+        self::assertSame(__DIR__ . '/configs/', $this->config->getDir());
+        $config = new Config();
+        self::assertNull($config->getDir());
+        $config->setDir(__DIR__ . '/configs');
+        self::assertSame(__DIR__ . '/configs/', $config->getDir());
+    }
+
     public function testLoadException() : void
     {
         $this->expectException(\LogicException::class);

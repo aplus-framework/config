@@ -23,7 +23,7 @@ class Config
      * @var array<int|string,mixed>
      */
     protected array $configs = [];
-    protected string $configsDir;
+    protected ?string $configsDir = null;
     /**
      * @var array<string,mixed>
      */
@@ -185,14 +185,27 @@ class Config
      * @param string $directory Directory path
      *
      * @throws LogicException If the config directory is not found
+     *
+     * @return static
      */
-    protected function setDir(string $directory) : void
+    public function setDir(string $directory) : static
     {
         $dir = \realpath($directory);
         if ($dir === false || ! \is_dir($dir)) {
             throw new LogicException('Config directory not found: ' . $directory);
         }
         $this->configsDir = $dir . \DIRECTORY_SEPARATOR;
+        return $this;
+    }
+
+    /**
+     * Get the base directory.
+     *
+     * @return string|null The directory realpath or null if it was not set
+     */
+    public function getDir() : ?string
+    {
+        return $this->configsDir;
     }
 
     /**
