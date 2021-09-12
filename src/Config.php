@@ -172,13 +172,14 @@ class Config
      *
      * @param array<string,mixed> $configs
      */
-    public function setMany(array $configs) : void
+    public function setMany(array $configs) : static
     {
         foreach ($configs as $name => $values) {
             foreach ($values as $instance => $config) {
                 $this->set($name, $config, $instance);
             }
         }
+        return $this;
     }
 
     /**
@@ -227,7 +228,7 @@ class Config
      *
      * @throws LogicException If the config file is not found
      */
-    public function load(string $name) : void
+    public function load(string $name) : static
     {
         $filename = $this->configsDir . $name . $this->suffix;
         $filename = \realpath($filename);
@@ -236,5 +237,6 @@ class Config
         }
         $configs = Isolation::require($filename);
         $this->setMany([$name => $configs]);
+        return $this;
     }
 }
