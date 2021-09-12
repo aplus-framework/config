@@ -135,7 +135,8 @@ class Config
      *
      * @param string $name The service name
      *
-     * @return array<string,array>|null The service instances configs
+     * @return array<string,array>|null The service instance names as keys and
+     * its configs as values or null if the service is not set
      */
     public function getInstances(string $name) : ?array
     {
@@ -170,7 +171,10 @@ class Config
      *
      * NOTE: The $configs will replace existing instances (except persistence).
      *
-     * @param array<string,mixed> $configs
+     * @param array<string,mixed> $configs The service names as keys and its
+     * instance configs as values
+     *
+     * @return static
      */
     public function setMany(array $configs) : static
     {
@@ -185,7 +189,7 @@ class Config
     /**
      * Get all configs.
      *
-     * @return array <int|string,mixed>
+     * @return array <int|string,mixed> All many configs
      */
     public function getAll() : array
     {
@@ -222,11 +226,13 @@ class Config
     }
 
     /**
-     * Loads a config file.
+     * Load a config file.
      *
-     * @param string $name the file name without the directory path and the suffix
+     * @param string $name The file name without the directory path and the suffix
      *
      * @throws LogicException If the config file is not found
+     *
+     * @return static
      */
     public function load(string $name) : static
     {
