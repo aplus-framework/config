@@ -19,7 +19,7 @@ namespace Framework\Config\Parsers\Extra;
 class JsonXMLElement extends \SimpleXMLElement implements \JsonSerializable
 {
     /**
-     * @return array<string,array>|string
+     * @return array<mixed>|string
      */
     public function jsonSerialize() : array | string
     {
