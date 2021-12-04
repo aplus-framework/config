@@ -9,7 +9,7 @@
         "yaml",
         "database"
     ],
-    "homepage": "https://docs.aplus-framework.com/guides/libraries/config/",
+    "homepage": "https://aplus-framework.com/packages/config",
     "license": "MIT",
     "authors": [
         {
@@ -54,13 +54,13 @@
     "support": {
         "email": "support@aplus-framework.com",
         "issues": "https://gitlab.com/aplus-framework/libraries/config/issues",
-        "wiki": "https://gitlab.com/aplus-framework/libraries/config/wikis/home",
+        "forum": "https://aplus-framework.com/forum",
         "source": "https://gitlab.com/aplus-framework/libraries/config",
         "docs": "https://docs.aplus-framework.com/guides/libraries/config/"
     },
     "funding": [
         {
-            "type": "other",
+            "type": "Aplus Sponsor",
             "url": "https://aplus-framework.com/sponsor"
         }
     ]
