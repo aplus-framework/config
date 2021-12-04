@@ -2,6 +2,7 @@
 
 # Aplus Framework Config Library
 
+- [Homepage](https://aplus-framework.com/packages/config)
 - [User Guide](https://docs.aplus-framework.com/guides/libraries/config/index.html)
 - [API Documentation](https://docs.aplus-framework.com/packages/config.html)
 
