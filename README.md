@@ -2,10 +2,11 @@
 
 # Aplus Framework Config Library
 
-- [Homepage](https://aplus-framework.com/packages/config)
+- [Home](https://aplus-framework.com/packages/config)
 - [User Guide](https://docs.aplus-framework.com/guides/libraries/config/index.html)
 - [API Documentation](https://docs.aplus-framework.com/packages/config.html)
 
+[![tests](https://github.com/aplus-framework/config/actions/workflows/tests.yml/badge.svg)](https://github.com/aplus-framework/config/actions/workflows/tests.yml)
 [![pipeline](https://gitlab.com/aplus-framework/libraries/config/badges/master/pipeline.svg)](https://gitlab.com/aplus-framework/libraries/config/-/pipelines?scope=branches)
 [![coverage](https://gitlab.com/aplus-framework/libraries/config/badges/master/coverage.svg?job=test:php)](https://aplus-framework.gitlab.io/libraries/config/coverage/)
 [![packagist](https://img.shields.io/packagist/v/aplus/config)](https://packagist.org/packages/aplus/config)
