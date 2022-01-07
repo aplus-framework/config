@@ -1,6 +1,9 @@
 Config
 ======
 
+.. image:: image.png
+    :alt: Aplus Framework Config Library
+
 Aplus Framework Config Library.
 
 - `Installation`_
