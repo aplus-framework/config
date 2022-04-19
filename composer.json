@@ -32,7 +32,7 @@
         }
     ],
     "require": {
-        "php": ">=8.0",
+        "php": ">=8.1",
         "ext-simplexml": "*",
         "ext-yaml": "*",
         "aplus/database": "^2.8",
