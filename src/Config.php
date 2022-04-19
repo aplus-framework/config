@@ -20,12 +20,12 @@ use LogicException;
 class Config
 {
     /**
-     * @var array<int|string,mixed>
+     * @var array<string,array<string,array<mixed>>>
      */
     protected array $configs = [];
     protected ?string $configsDir = null;
     /**
-     * @var array<string,mixed>
+     * @var array<string,array<string,array<mixed>>>
      */
     protected array $persistence = [];
     protected string $suffix;
@@ -33,10 +33,10 @@ class Config
     /**
      * Config constructor.
      *
-     * @param array<string,mixed>|string|null $configs An array to set many
-     * configs, the config base directory or null
-     * @param array<string,mixed> $persistence Configs that will always overwrite
-     * custom added, loaded or set configs
+     * @param array<string,array<string,array<mixed>>>|string|null $configs An
+     * array to set many configs, the config base directory or null
+     * @param array<string,array<string,array<mixed>>> $persistence Configs that
+     * will always overwrite custom added, loaded or set configs
      * @param string $suffix The services filenames suffix used when the config
      * directory is set
      */
@@ -57,7 +57,7 @@ class Config
     /**
      * Set persistent configs.
      *
-     * @param array<string,mixed> $configs
+     * @param array<string,array<mixed>> $configs
      */
     protected function setPersistence(array $configs) : void
     {
@@ -81,7 +81,7 @@ class Config
      * @param string $name The service name
      * @param string $instance The service instance
      *
-     * @return array<int|string,mixed> The service instance custom configs with
+     * @return array<mixed> The service instance custom configs with
      * persistent configs
      */
     protected function getPersistentConfigs(string $name, string $instance) : array
@@ -96,10 +96,10 @@ class Config
      * NOTE: These configs will replace an existing instance (except persistence).
      *
      * @param string $name The service name
-     * @param array<int|string,mixed> $configs The new configs
+     * @param array<mixed> $configs The new configs
      * @param string $instance The service instance
      *
-     * @return array<int|string,mixed> The service instance configs
+     * @return array<mixed> The service instance configs
      */
     public function set(
         string $name,
@@ -119,7 +119,7 @@ class Config
      * @throws LogicException If the service configs are empty and the Config
      * directory is set, and the config file is not found
      *
-     * @return array<int|string,mixed>|null The instance configs as array or null
+     * @return array<mixed>|null The instance configs as array or null
      * if is not set
      */
     public function get(string $name, string $instance = 'default') : ?array
@@ -135,8 +135,8 @@ class Config
      *
      * @param string $name The service name
      *
-     * @return array<string,array>|null The service instance names as keys and
-     * its configs as values or null if the service is not set
+     * @return array<string,array<string,mixed>>|null The service instance names as
+     * keys and its configs as values or null if the service is not set
      */
     public function getInstances(string $name) : ?array
     {
@@ -149,10 +149,10 @@ class Config
      * NOTE: IF the service instance already exists, the configs will be merged
      *
      * @param string $name The service name
-     * @param array<int|string,mixed> $configs The service configs
+     * @param array<mixed> $configs The service configs
      * @param string $instance The service instance
      *
-     * @return array<int|string,mixed> The service instance configs
+     * @return array<mixed> The service instance configs
      */
     public function add(string $name, array $configs, string $instance = 'default') : array
     {
@@ -171,8 +171,8 @@ class Config
      *
      * NOTE: The $configs will replace existing instances (except persistence).
      *
-     * @param array<string,mixed> $configs The service names as keys and its
-     * instance configs as values
+     * @param array<string,array<string,array<mixed>>> $configs The service
+     * names as keys and its instance configs as values
      *
      * @return static
      */
@@ -189,7 +189,7 @@ class Config
     /**
      * Get all configs.
      *
-     * @return array <int|string,mixed> All many configs
+     * @return array<string,array<string,array<mixed>>> All many configs
      */
     public function getAll() : array
     {
