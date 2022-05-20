@@ -18,6 +18,15 @@ use Framework\Config\Parsers\Extra\JsonXMLElement;
  */
 class XmlParser extends Parser
 {
+    /**
+     * Parses an XML file.
+     *
+     * @param mixed $config path to the XML file
+     *
+     * @throws ParserException
+     *
+     * @return array<mixed> The XML parsed data
+     */
     public static function parse(mixed $config) : array
     {
         static::checkConfig($config);

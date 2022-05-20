@@ -16,6 +16,15 @@ namespace Framework\Config\Parsers;
  */
 class EnvParser extends Parser
 {
+    /**
+     * Parses an .ENV file.
+     *
+     * @param mixed $config Path to the .ENV file.
+     *
+     * @throws ParserException
+     *
+     * @return array<mixed> The .ENV parsed data
+     */
     public static function parse(mixed $config) : array
     {
         static::checkConfig($config);

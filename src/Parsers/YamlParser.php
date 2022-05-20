@@ -16,6 +16,15 @@ namespace Framework\Config\Parsers;
  */
 class YamlParser extends Parser
 {
+    /**
+     * Parses an YAML file.
+     *
+     * @param mixed $config path to the YAML file
+     *
+     * @throws ParserException
+     *
+     * @return array<mixed> The YAML parsed data
+     */
     public static function parse(mixed $config) : array
     {
         static::checkConfig($config);

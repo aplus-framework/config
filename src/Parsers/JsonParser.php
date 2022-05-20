@@ -16,6 +16,15 @@ namespace Framework\Config\Parsers;
  */
 class JsonParser extends Parser
 {
+    /**
+     * Parses a JSON file.
+     *
+     * @param mixed $config path to the JSON file
+     *
+     * @throws ParserException
+     *
+     * @return array<mixed> The JSON parsed data
+     */
     public static function parse(mixed $config) : array
     {
         static::checkConfig($config);

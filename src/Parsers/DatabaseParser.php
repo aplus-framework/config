@@ -18,6 +18,16 @@ use Framework\Database\Database;
  */
 class DatabaseParser extends Parser
 {
+    /**
+     * Get config from a database.
+     *
+     * @param mixed $config array with configs for database connection:
+     * host, port, username, password, schema and table
+     *
+     * @throws ParserException
+     *
+     * @return array<mixed> The database parsed data
+     */
     public static function parse(mixed $config) : array
     {
         static::checkConfig($config);

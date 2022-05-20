@@ -16,6 +16,15 @@ namespace Framework\Config\Parsers;
  */
 class IniParser extends Parser
 {
+    /**
+     * Parses an INI file.
+     *
+     * @param mixed $config path to the INI file
+     *
+     * @throws ParserException
+     *
+     * @return array<mixed> The INI parsed data
+     */
     public static function parse(mixed $config) : array
     {
         static::checkConfig($config);
