@@ -35,7 +35,7 @@ Config Manipulation
     $config = new Config();
 
 The structure of a service instance configuration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#################################################
 
 .. code-block:: php
 
@@ -73,9 +73,10 @@ configuration file in the `App Project <https://docs.aplus-framework.com/guides/
     ]
 
 Set and Get
-^^^^^^^^^^^
+###########
 
-**Set Service Configs**
+Set Service Configs
+^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: php
 
@@ -86,7 +87,8 @@ Set and Get
     ];
     $config->set($serviceName, $serviceConfigs);
 
-**Get Service Configs**
+Get Service Configs
+^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: php
 
@@ -99,7 +101,8 @@ Set and Get
         'username' => 'root',
     ]
 
-**Custom Service Instance Names**
+Custom Service Instance Names
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: php
 
@@ -112,7 +115,7 @@ Set and Get
     $configs = $config->get($serviceName, $serviceInstanceName);
 
 Add
-^^^
+###
 
 .. code-block:: php
 
@@ -123,7 +126,7 @@ Add
     $config->add($serviceName, $serviceConfigs, 'custom');
 
 Set Many
-^^^^^^^^
+########
 
 .. code-block:: php
 
@@ -147,7 +150,7 @@ Set Many
     ]);
 
 Get All
-^^^^^^^
+#######
 
 .. code-block:: php
 
@@ -180,6 +183,22 @@ key set:
 
 Persistence
 -----------
+
+In the second argument of the Config class it is possible to set persistent
+configurations, which will not be overwritten by the ``add``, ``load``, ``set``
+and ``setMany`` methods:
+
+.. code-block:: php
+
+    use Framework\Config\Config;
+
+    $directory = __DIR__ . '/../configs';
+    $persistence = [
+        'database' => [
+            'host' => 'localhost',
+        ]
+    ]
+    $config = new Config($directory, $persistence);
 
 Parsers
 -------
@@ -221,7 +240,7 @@ The Config Library provides the following parsers:
 - `Env Parser`_
 
 INI Parser
-^^^^^^^^^^
+##########
 
 INI syntax
 
@@ -245,7 +264,7 @@ INI syntax
     custom.array.1 = 'False'
 
 YAML Parser
-^^^^^^^^^^^
+###########
 
 YAML syntax
 
@@ -272,7 +291,7 @@ YAML syntax
         array: ['False']
 
 Database Parser
-^^^^^^^^^^^^^^^
+###############
 
 Database table
 
@@ -335,7 +354,7 @@ Database table
         ])->run();
 
 JSON Parser
-^^^^^^^^^^^
+###########
 
 JSON syntax
 
@@ -370,7 +389,7 @@ JSON syntax
     }
 
 XML Parser
-^^^^^^^^^^
+##########
 
 XML syntax
 
@@ -405,7 +424,7 @@ XML syntax
     </config>
 
 Env Parser
-^^^^^^^^^^
+##########
 
 Dotenv syntax
 
