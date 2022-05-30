@@ -25,6 +25,11 @@ The installation of this library can be done with Composer:
 Config Manipulation
 --------------------
 
+The Config Library allows you to manipulate configurations to be used by
+services, storing them in a single place.
+
+To instantiate the Config class, we can do as follows:
+
 .. code-block:: php
 
     <?php
@@ -37,46 +42,65 @@ Config Manipulation
 The structure of a service instance configuration
 #################################################
 
+All configurations are stored in arrays, in which there are keys with the name
+of the service instances, such as ``default``:
+
 .. code-block:: php
 
     [
         'default' => [],
     ]
 
-Used for the `Language Library <https://docs.aplus-framework.com/guides/libraries/language/>`_
-configuration file in the `App Project <https://docs.aplus-framework.com/guides/projects/app/>`_.
+And in these keys are inserted the configs of each service instance.
+
+Let's look at a configuration file used to instantiate database services:
 
 .. code-block:: php
 
-    use Framework\Language\Language;
+    <?php
 
     return [
         'default' => [
-            'default' => 'en',
-            'supported' => [
-                'en',
-                'es',
-                'pt-br',
-            ],
-            'fallback_level' => Language::FALLBACK_NONE,
-            'directories' => null,
-            'negotiate' => false,
+            'host' => 'localhost',
+            'username' => 'root',
+            'password' => 'password',
         ],
     ];
+
+Note that the file returns an array with the ``default`` key.
+
+It is possible to define more configurations, adding new keys, which are the
+name of the service instances.
+
+Let's see how to define the configurations for the ``default`` and ``replica``
+instances:
 
 .. code-block:: php
 
     [
-        'default' => [],
-        'custom_instance' => [],
-        'other_custom_instance' => [],
+        'default' => [
+            'host' => 'localhost',
+            'username' => 'root',
+            'password' => 'password',
+        ],
+        'replica' => [
+            'host' => '192.168.0.100',
+            'username' => 'root',
+            'password' => 'foo',
+        ],
     ]
 
 Set and Get
 ###########
 
+In the Config instance we can set and get configurations with the ``set`` and
+``get`` methods.
+
 Set Service Configs
 ^^^^^^^^^^^^^^^^^^^
+
+Let's see how to set the **database** service configs with host and username
+information:
 
 .. code-block:: php
 
@@ -90,9 +114,14 @@ Set Service Configs
 Get Service Configs
 ^^^^^^^^^^^^^^^^^^^
 
+So, we can get the information through the ``get`` method. Let's see:
+
 .. code-block:: php
 
+    $serviceName = 'database';
     $configs = $config->get($serviceName);
+
+And, in the ``$configs`` variable, the database information will be defined:
 
 .. code-block:: php
 
@@ -104,29 +133,52 @@ Get Service Configs
 Custom Service Instance Names
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+The default instance is the ``default``. However, you can manipulate information
+from other instances.
+
+To set a non-default instance, use the third parameter of the ``set`` method.
+
+Let's see how to add information to the ``replica`` instance:
+
 .. code-block:: php
 
-    $serviceInstanceName = 'custom';
+    $serviceInstanceName = 'replica';
     $configs = $config->set($serviceName, $serviceConfigs, $serviceInstanceName);
 
+And to get information, we use the second parameter of the ``get`` method.
+
 .. code-block:: php
 
-    $serviceInstanceName = 'custom';
+    $serviceInstanceName = 'replica';
     $configs = $config->get($serviceName, $serviceInstanceName);
 
 Add
 ###
 
+Above, we saw how to set configurations that overwrite existing instances.
+
+But, it is possible to add only new configs, which will be merged.
+
+For this, we use the ``add`` method:
+
 .. code-block:: php
 
     $config->add($serviceName, $serviceConfigs);
 
+And, in the third parameter, you can define in which instance the configs will
+be added:
+
 .. code-block:: php
 
-    $config->add($serviceName, $serviceConfigs, 'custom');
+    $config->add($serviceName, $serviceConfigs, 'default');
 
 Set Many
 ########
+
+It is possible to set several configurations at once through the ``setMany`` method.
+
+Let's see how to set two instances of database configurations (default and
+replica) and one instance for the cache service (default):
 
 .. code-block:: php
 
@@ -152,6 +204,8 @@ Set Many
 Get All
 #######
 
+To get all the configurations use the ``getAll`` method:
+
 .. code-block:: php
 
     $allConfigs = $config->getAll();
@@ -159,13 +213,25 @@ Get All
 Configuration Files
 -------------------
 
+Above, we saw how to set configurations individually by instances and also
+several at once.
+
+In addition to being able to modify the configurations by methods, it is also
+possible to define configurations in files that contain the name of the services
+and return an array with the instances.
+
+To do this, use Config passing the directory where the configuration files will
+be in the first argument:
+
 .. code-block:: php
 
     $directoryPath = __DIR__ . '/configs';
     $config = new Config($directoryPath);
 
-A basic config file must return an *array* that should have the ``default``
-key set:
+It is desirable that all configuration files have the ``default`` instance.
+
+In the file below we have two instances, ``default`` and ``custom`` and the file
+name must be the name of the service, for example, **database.php**:
 
 .. code-block:: php
 
@@ -174,12 +240,19 @@ key set:
         'custom' => [],
     ];
 
+When there is a directory defined, the configuration files will be loaded
+automatically and the service settings will be filled in.
+
+In the example below, let's get the database service information with the
+``default`` instance and then with the ``custom`` instance:
+
 .. code-block:: php
 
     $databaseDefaultConfigs = $config->get('database');
     $databaseCustomConfigs = $config->get('database', 'custom');
 
-`Config Manipulation`_
+If you try to get configs from a service that hasn't been set up yet and the
+service file doesn't exist, an exception will be thrown.
 
 Persistence
 -----------
@@ -203,9 +276,12 @@ and ``setMany`` methods:
 Parsers
 -------
 
-Config `Persistence`_  or with the `Set Many`_ method.
+The library has several parses for different types of files. With which it is
+possible to set `Persistence`_ or several settings at once using the
+`Set Many`_ method.
 
-Example setting many:
+Let's see an example parsing a file of type **env** and setting various
+configurations:
 
 .. code-block:: php
 
@@ -218,7 +294,7 @@ Example setting many:
     $config = new Config();
     $config->setMany($configs);
 
-Example setting persistence:
+The same can be done to set persistent configurations:
 
 .. code-block:: php
 
@@ -242,7 +318,7 @@ The Config Library provides the following parsers:
 INI Parser
 ##########
 
-INI syntax
+Files of type **INI** can be parsed as shown below:
 
 .. code-block:: php
 
@@ -250,6 +326,8 @@ INI syntax
 
     $filename = __DIR__ . '/../config.ini';
     $configs = IniParser::parse($filename);
+
+The syntax of **INI** files is as follows:
 
 .. code-block:: ini
 
@@ -266,7 +344,7 @@ INI syntax
 YAML Parser
 ###########
 
-YAML syntax
+Files of type **YAML** can be parsed as follows:
 
 .. code-block:: php
 
@@ -274,6 +352,8 @@ YAML syntax
 
     $filename = __DIR__ . '/../config.yaml';
     $configs = YamlParser::parse($filename);
+
+And below is an example of the syntax of a **YAML** file:
 
 .. code-block:: yaml
 
@@ -293,9 +373,11 @@ YAML syntax
 Database Parser
 ###############
 
-Database table
+In addition to files, configurations of a **database** table can also be
+obtained using the `Database Library <https://docs.aplus-framework.com/guides/libraries/database/>`_.
 
-`Database <https://docs.aplus-framework.com/guides/libraries/database/>`_
+Instead of passing the file path to the ``parse`` method, you pass the
+database connection information:
 
 .. code-block:: php
 
@@ -309,6 +391,8 @@ Database table
     ];
     $configs = DatabaseParser::parse($databaseConfigs);
 
+The configuration table in the database can be created as shown below:
+
 .. code-block:: sql
 
     USE `app`;
@@ -318,6 +402,14 @@ Database table
         `value` varchar(255) NOT NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+And the values of the services must have the service name as a prefix, followed
+by a period and the name of the instance and after another period the name
+of the configuration key.
+
+Let's see how to enter example configurations:
+
+.. code-block:: sql
+
     INSERT INTO `Configs`
     (`key`, `value`)
     VALUES
@@ -325,6 +417,9 @@ Database table
     ('service1.default.value2', 23),
     ('service2.default.0', 'True'),
     ('service2.custom.0', '"False"');
+
+Below is an example file to create the Configs table and insert sample data
+using the Database Library:
 
 .. code-block:: php
 
@@ -345,7 +440,7 @@ Database table
         })->run();
 
     $database->insert($table)
-        ->columns('key', 'value')            
+        ->columns('key', 'value')
         ->values([
             ['service1.default.value1', 'foo'],
             ['service1.default.value2', 23],
@@ -356,7 +451,9 @@ Database table
 JSON Parser
 ###########
 
-JSON syntax
+Configurations can also be stored in **JSON** files.
+
+To get the configs, just use JsonParser:
 
 .. code-block:: php
 
@@ -364,6 +461,8 @@ JSON syntax
 
     $filename = __DIR__ . '/../config.json';
     $configs = JsonParser::parse($filename);
+
+Below is an example with the **JSON** syntax:
 
 .. code-block:: json
 
@@ -391,7 +490,7 @@ JSON syntax
 XML Parser
 ##########
 
-XML syntax
+Configurations can also be stored in **XML**.
 
 .. code-block:: php
 
@@ -399,6 +498,8 @@ XML syntax
 
     $filename = __DIR__ . '/../config.xml';
     $configs = XmlParser::parse($filename);
+
+Example **XML** file with configs:
 
 .. code-block:: xml
 
@@ -426,7 +527,7 @@ XML syntax
 Env Parser
 ##########
 
-Dotenv syntax
+Also, you can use files with the **ENV** syntax:
 
 .. code-block:: php
 
