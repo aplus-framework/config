@@ -11,6 +11,7 @@ namespace Framework\Config;
 
 use Framework\Helpers\Isolation;
 use LogicException;
+use SensitiveParameter;
 
 /**
  * Class Config.
@@ -41,8 +42,8 @@ class Config
      * directory is set
      */
     public function __construct(
-        array | string $configs = null,
-        array $persistence = [],
+        #[SensitiveParameter] array | string $configs = null,
+        #[SensitiveParameter] array $persistence = [],
         string $suffix = '.php'
     ) {
         if ($configs !== null) {
@@ -59,7 +60,7 @@ class Config
      *
      * @param array<string,array<mixed>> $configs
      */
-    protected function setPersistence(array $configs) : void
+    protected function setPersistence(#[SensitiveParameter] array $configs) : void
     {
         $this->persistence = $configs;
     }
@@ -103,7 +104,7 @@ class Config
      */
     public function set(
         string $name,
-        array $configs,
+        #[SensitiveParameter] array $configs,
         string $instance = 'default'
     ) : array {
         $this->configs[$name][$instance] = $configs;
@@ -154,8 +155,11 @@ class Config
      *
      * @return array<mixed> The service instance configs
      */
-    public function add(string $name, array $configs, string $instance = 'default') : array
-    {
+    public function add(
+        string $name,
+        #[SensitiveParameter] array $configs,
+        string $instance = 'default'
+    ) : array {
         if (isset($this->configs[$name][$instance])) {
             $this->configs[$name][$instance] = \array_replace_recursive(
                 $this->configs[$name][$instance],
@@ -176,7 +180,7 @@ class Config
      *
      * @return static
      */
-    public function setMany(array $configs) : static
+    public function setMany(#[SensitiveParameter] array $configs) : static
     {
         foreach ($configs as $name => $values) {
             foreach ($values as $instance => $config) {

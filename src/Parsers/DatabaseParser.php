@@ -10,6 +10,7 @@
 namespace Framework\Config\Parsers;
 
 use Framework\Database\Database;
+use SensitiveParameter;
 
 /**
  * Class DatabaseParser.
@@ -28,7 +29,7 @@ class DatabaseParser extends Parser
      *
      * @return array<mixed> The database parsed data
      */
-    public static function parse(mixed $config) : array
+    public static function parse(#[SensitiveParameter] mixed $config) : array
     {
         static::checkConfig($config);
         return static::parseOrThrow(static function () use ($config) : array {
@@ -60,7 +61,7 @@ class DatabaseParser extends Parser
         });
     }
 
-    protected static function checkConfig(mixed $config) : void
+    protected static function checkConfig(#[SensitiveParameter] mixed $config) : void
     {
         if ( ! \is_array($config)) {
             throw new ParserException(static::class . ' config must be an array');

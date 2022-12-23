@@ -11,6 +11,7 @@ namespace Framework\Config\Parsers;
 
 use Closure;
 use JetBrains\PhpStorm\Pure;
+use SensitiveParameter;
 
 /**
  * Class Parser.
@@ -55,7 +56,7 @@ abstract class Parser
      *
      * @throws ParserException If config is invalid
      */
-    protected static function checkConfig(mixed $config) : void
+    protected static function checkConfig(#[SensitiveParameter] mixed $config) : void
     {
         if ( ! \is_string($config)) {
             throw new ParserException(static::class . ' config must be a string');
