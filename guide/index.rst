@@ -109,7 +109,7 @@ information:
         'host' => 'localhost',
         'username' => 'root',
     ];
-    $config->set($serviceName, $serviceConfigs);
+    $config->set($serviceName, $serviceConfigs); // array
 
 Get Service Configs
 ^^^^^^^^^^^^^^^^^^^
@@ -119,7 +119,7 @@ So, we can get the information through the ``get`` method. Let's see:
 .. code-block:: php
 
     $serviceName = 'database';
-    $configs = $config->get($serviceName);
+    $configs = $config->get($serviceName); // array or null
 
 And, in the ``$configs`` variable, the database information will be defined:
 
@@ -150,7 +150,7 @@ And to get information, we use the second parameter of the ``get`` method.
 .. code-block:: php
 
     $serviceInstanceName = 'replica';
-    $configs = $config->get($serviceName, $serviceInstanceName);
+    $configs = $config->get($serviceName, $serviceInstanceName); // array or null
 
 Add
 ###
@@ -163,14 +163,14 @@ For this, we use the ``add`` method:
 
 .. code-block:: php
 
-    $config->add($serviceName, $serviceConfigs);
+    $config->add($serviceName, $serviceConfigs); // array
 
 And, in the third parameter, you can define in which instance the configs will
 be added:
 
 .. code-block:: php
 
-    $config->add($serviceName, $serviceConfigs, 'default');
+    $config->add($serviceName, $serviceConfigs, 'default'); // array
 
 Set Many
 ########
@@ -199,7 +199,7 @@ replica) and one instance for the cache service (default):
                 'handler' => 'memcached',
             ],
         ],
-    ]);
+    ]); // static
 
 Get All
 #######
@@ -208,7 +208,7 @@ To get all the configurations use the ``getAll`` method:
 
 .. code-block:: php
 
-    $allConfigs = $config->getAll();
+    $allConfigs = $config->getAll(); // array
 
 Configuration Files
 -------------------
@@ -248,8 +248,8 @@ In the example below, let's get the database service information with the
 
 .. code-block:: php
 
-    $databaseDefaultConfigs = $config->get('database');
-    $databaseCustomConfigs = $config->get('database', 'custom');
+    $databaseDefaultConfigs = $config->get('database'); // array or null
+    $databaseCustomConfigs = $config->get('database', 'custom'); // array or null
 
 If you try to get configs from a service that hasn't been set up yet and the
 service file doesn't exist, an exception will be thrown.
@@ -289,10 +289,10 @@ configurations:
     use Framework\Config\Parsers\EnvParser;
 
     $filename = __DIR__ . '/../.env';
-    $configs = EnvParser::parse($filename);
+    $configs = EnvParser::parse($filename); // array
 
     $config = new Config();
-    $config->setMany($configs);
+    $config->setMany($configs); // static
 
 The same can be done to set persistent configurations:
 
@@ -302,7 +302,7 @@ The same can be done to set persistent configurations:
     use Framework\Config\Parsers\EnvParser;
 
     $filename = __DIR__ . '/../.env';
-    $configs = EnvParser::parse($filename);
+    $configs = EnvParser::parse($filename); // array
 
     $config = new Config(persistence: $configs);
 
@@ -325,7 +325,7 @@ Files of type **INI** can be parsed as shown below:
     use Framework\Config\Parsers\IniParser;
 
     $filename = __DIR__ . '/../config.ini';
-    $configs = IniParser::parse($filename);
+    $configs = IniParser::parse($filename); // array
 
 The syntax of **INI** files is as follows:
 
@@ -351,7 +351,7 @@ Files of type **YAML** can be parsed as follows:
     use Framework\Config\Parsers\YamlParser;
 
     $filename = __DIR__ . '/../config.yaml';
-    $configs = YamlParser::parse($filename);
+    $configs = YamlParser::parse($filename); // array
 
 And below is an example of the syntax of a **YAML** file:
 
@@ -389,7 +389,7 @@ database connection information:
         'schema' => 'app'
         'table' => 'Configs'
     ];
-    $configs = DatabaseParser::parse($databaseConfigs);
+    $configs = DatabaseParser::parse($databaseConfigs); // array
 
 The configuration table in the database can be created as shown below:
 
@@ -460,7 +460,7 @@ To get the configs, just use JsonParser:
     use Framework\Config\Parsers\JsonParser;
 
     $filename = __DIR__ . '/../config.json';
-    $configs = JsonParser::parse($filename);
+    $configs = JsonParser::parse($filename); // array
 
 Below is an example with the **JSON** syntax:
 
@@ -497,7 +497,7 @@ Configurations can also be stored in **XML**.
     use Framework\Config\Parsers\XmlParser;
 
     $filename = __DIR__ . '/../config.xml';
-    $configs = XmlParser::parse($filename);
+    $configs = XmlParser::parse($filename); // array
 
 Example **XML** file with configs:
 
@@ -534,7 +534,7 @@ Also, you can use files with the **ENV** syntax:
     use Framework\Config\Parsers\EnvParser;
 
     $filename = __DIR__ . '/../config.env';
-    $configs = EnvParser::parse($filename);
+    $configs = EnvParser::parse($filename); // array
 
 .. code-block:: bash
 
