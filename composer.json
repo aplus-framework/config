@@ -20,9 +20,9 @@
     "homepage": "https://aplus-framework.com/packages/config",
     "support": {
         "email": "support@aplus-framework.com",
-        "issues": "https://gitlab.com/aplus-framework/libraries/config/issues",
+        "issues": "https://github.com/aplus-framework/config/issues",
         "forum": "https://aplus-framework.com/forum",
-        "source": "https://gitlab.com/aplus-framework/libraries/config",
+        "source": "https://github.com/aplus-framework/config",
         "docs": "https://docs.aplus-framework.com/guides/libraries/config/"
     },
     "funding": [
