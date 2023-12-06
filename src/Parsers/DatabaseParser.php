@@ -63,16 +63,16 @@ class DatabaseParser extends Parser
 
     protected static function checkConfig(#[SensitiveParameter] mixed $config) : void
     {
-        if ( ! \is_array($config)) {
+        if (!\is_array($config)) {
             throw new ParserException(static::class . ' config must be an array');
         }
-        if ( ! isset($config['username'])) {
+        if (!isset($config['username'])) {
             throw new ParserException(static::class . ' config username not set');
         }
-        if ( ! isset($config['schema'])) {
+        if (!isset($config['schema'])) {
             throw new ParserException(static::class . ' config schema not set');
         }
-        if ( ! isset($config['table'])) {
+        if (!isset($config['table'])) {
             throw new ParserException(static::class . ' config table not set');
         }
     }

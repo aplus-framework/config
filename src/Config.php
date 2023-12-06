@@ -42,8 +42,10 @@ class Config
      * directory is set
      */
     public function __construct(
-        #[SensitiveParameter] array | string $configs = null,
-        #[SensitiveParameter] array $persistence = [],
+        #[SensitiveParameter]
+        array | string $configs = null,
+        #[SensitiveParameter]
+        array $persistence = [],
         string $suffix = '.php'
     ) {
         if ($configs !== null) {
@@ -104,7 +106,8 @@ class Config
      */
     public function set(
         string $name,
-        #[SensitiveParameter] array $configs,
+        #[SensitiveParameter]
+        array $configs,
         string $instance = 'default'
     ) : array {
         $this->configs[$name][$instance] = $configs;
@@ -157,7 +160,8 @@ class Config
      */
     public function add(
         string $name,
-        #[SensitiveParameter] array $configs,
+        #[SensitiveParameter]
+        array $configs,
         string $instance = 'default'
     ) : array {
         if (isset($this->configs[$name][$instance])) {
@@ -212,7 +216,7 @@ class Config
     public function setDir(string $directory) : static
     {
         $dir = \realpath($directory);
-        if ($dir === false || ! \is_dir($dir)) {
+        if ($dir === false || !\is_dir($dir)) {
             throw new LogicException('Config directory not found: ' . $directory);
         }
         $this->configsDir = $dir . \DIRECTORY_SEPARATOR;
@@ -242,7 +246,7 @@ class Config
     {
         $filename = $this->configsDir . $name . $this->suffix;
         $filename = \realpath($filename);
-        if ($filename === false || ! \is_file($filename)) {
+        if ($filename === false || !\is_file($filename)) {
             throw new LogicException('Config file not found: ' . $name);
         }
         $configs = Isolation::require($filename);

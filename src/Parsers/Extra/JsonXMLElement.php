@@ -26,11 +26,11 @@ class JsonXMLElement extends \SimpleXMLElement implements \JsonSerializable
         $data = [];
         foreach ($this as $name => $element) {
             $name = (string) $name;
-            if ( ! isset($data[$name])) {
+            if (!isset($data[$name])) {
                 $data[$name] = $element;
                 continue;
             }
-            if ( ! \is_array($data[$name])) {
+            if (!\is_array($data[$name])) {
                 $data[$name] = [$data[$name]];
             }
             $data[$name][] = $element;

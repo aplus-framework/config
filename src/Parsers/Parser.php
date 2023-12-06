@@ -58,14 +58,14 @@ abstract class Parser
      */
     protected static function checkConfig(#[SensitiveParameter] mixed $config) : void
     {
-        if ( ! \is_string($config)) {
+        if (!\is_string($config)) {
             throw new ParserException(static::class . ' config must be a string');
         }
         $file = \realpath($config);
-        if ($file === false || ! \is_file($file)) {
+        if ($file === false || !\is_file($file)) {
             throw new ParserException('File not found: ' . $config);
         }
-        if ( ! \is_readable($file)) {
+        if (!\is_readable($file)) {
             throw new ParserException('File is not readable: ' . $config);
         }
     }
@@ -134,7 +134,7 @@ abstract class Parser
      */
     protected static function ksortRecursive(mixed $value) : mixed
     {
-        if ( ! \is_array($value)) {
+        if (!\is_array($value)) {
             return $value;
         }
         \ksort($value);
