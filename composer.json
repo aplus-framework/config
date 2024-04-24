@@ -36,7 +36,7 @@
         "ext-simplexml": "*",
         "ext-yaml": "*",
         "aplus/database": "^4.0",
-        "aplus/helpers": "^3.0"
+        "aplus/helpers": "^4.0"
     },
     "require-dev": {
         "ext-xdebug": "*",
