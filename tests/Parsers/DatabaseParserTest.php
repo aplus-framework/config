@@ -59,7 +59,7 @@ final class DatabaseParserTest extends ParserTestCase
             ->values('service1.default.array.5', '1.5')
             ->values('service1.other.quot', '"quot\"1\"23"')
             ->values('service1.other.apos', "apos'4'56")
-            ->values('service1.other.mix', '"null 123 \\"')
+            ->values('service1.other.mix', '"null 123 \"')
             ->values('service2.default.array.0', "'True'")
             ->values('service2.default.array.1', "'False'")
             ->values('service2.default.array.2', "'Null'")
