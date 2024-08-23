@@ -96,7 +96,7 @@ abstract class Parser
      * @return array<int|string,mixed>|bool|float|int|string|null The output value
      */
     #[Pure]
-    protected static function getValue(string $value) : array|bool|int|float|string|null
+    protected static function getValue(string $value) : array | bool | float | int | string | null
     {
         $value = \trim($value);
         $lowerValue = \strtolower($value);

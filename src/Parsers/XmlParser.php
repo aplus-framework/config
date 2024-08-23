@@ -52,7 +52,7 @@ class XmlParser extends Parser
      *
      * @return array<int|string,mixed>|bool|float|int|string|null
      */
-    protected static function parseValue(array|string $value) : array|bool|int|float|string|null
+    protected static function parseValue(array | string $value) : array | bool | float | int | string | null
     {
         if (\is_array($value)) {
             foreach ($value as &$val) {

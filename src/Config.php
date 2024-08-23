@@ -43,7 +43,7 @@ class Config
      */
     public function __construct(
         #[SensitiveParameter]
-        array | string $configs = null,
+        array | string | null $configs = null,
         #[SensitiveParameter]
         array $persistence = [],
         string $suffix = '.php'
