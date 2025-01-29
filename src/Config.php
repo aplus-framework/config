@@ -9,6 +9,7 @@
  */
 namespace Framework\Config;
 
+use Framework\Config\Debug\ConfigCollector;
 use Framework\Helpers\Isolation;
 use LogicException;
 use SensitiveParameter;
@@ -30,6 +31,7 @@ class Config
      */
     protected array $persistence = [];
     protected string $suffix;
+    protected ConfigCollector $debugCollector;
 
     /**
      * Config constructor.
@@ -244,6 +246,22 @@ class Config
      */
     public function load(string $name) : static
     {
+        if (isset($this->debugCollector)) {
+            $start = \microtime(true);
+            $this->loadFile($name);
+            $end = \microtime(true);
+            $this->debugCollector->addData([
+                'start' => $start,
+                'end' => $end,
+                'name' => $name,
+            ]);
+            return $this;
+        }
+        return $this->loadFile($name);
+    }
+
+    protected function loadFile(string $name) : static
+    {
         $filename = $this->configsDir . $name . $this->suffix;
         $filename = \realpath($filename);
         if ($filename === false || !\is_file($filename)) {
@@ -251,6 +269,13 @@ class Config
         }
         $configs = Isolation::require($filename);
         $this->setMany([$name => $configs]);
+        return $this;
+    }
+
+    public function setDebugCollector(ConfigCollector $debugCollector) : static
+    {
+        $this->debugCollector = $debugCollector;
+        $this->debugCollector->setConfig($this);
         return $this;
     }
 }
