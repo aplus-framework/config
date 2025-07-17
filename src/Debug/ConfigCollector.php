@@ -86,7 +86,7 @@ class ConfigCollector extends Collector
                     <td rowspan="<?= $count ?>"><?= $config['name'] ?></td>
                     <td><?= $config['instances'][0]['name'] ?></td>
                     <td rowspan="1">
-
+                    <?php if (!empty($config['instances'][0]['values'])): ?>
                         <table>
                             <thead>
                             <tr>
@@ -103,7 +103,7 @@ class ConfigCollector extends Collector
                             <?php endforeach ?>
                             </tbody>
                         </table>
-
+                    <?php endif ?>
                     </td>
                     <td rowspan="<?= \count($config['instances']) ?>">
                         <?php
