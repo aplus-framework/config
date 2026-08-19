@@ -44,7 +44,7 @@ class ConfigCollector extends Collector
         if (!isset($this->config)) {
             \ob_start();
             echo '<p>This collector has not been added to a Config instance.</p>';
-            return \ob_get_clean(); // @phpstan-ignore-line
+            return \ob_get_clean();
         }
         $count = \count($this->getConfigs());
         \ob_start();
@@ -167,7 +167,7 @@ class ConfigCollector extends Collector
             $result[$count]['instances'] = [];
             $counter = 0;
             foreach ($instances as $instance => $values) {
-                $result[$count]['instances'][$counter]['name'] = $instance;
+                $result[$count]['instances'][$counter]['name'] = $instance; // @phpstan-ignore-line
                 $result[$count]['instances'][$counter]['values'] = ArraySimple::convert($values);
                 foreach ($result[$count]['instances'][$counter]['values'] as &$value) {
                     $value = \get_debug_type($value);
