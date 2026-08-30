@@ -11,7 +11,7 @@ namespace Framework\Config\Debug;
 
 use Framework\Config\Config;
 use Framework\Debug\Collector;
-use Framework\Debug\Debugger;
+use Framework\Debug\Debugger as D;
 use Framework\Helpers\ArraySimple;
 
 class ConfigCollector extends Collector
@@ -31,7 +31,7 @@ class ConfigCollector extends Collector
             $activities[] = [
                 'collector' => $this->getName(),
                 'class' => static::class,
-                'description' => 'Load config file ' . \htmlentities($data['name']),
+                'description' => 'Load config file ' . D::esc($data['name']),
                 'start' => $data['start'],
                 'end' => $data['end'],
             ];
@@ -51,7 +51,7 @@ class ConfigCollector extends Collector
         $dir = $this->config->getDir();
         if ($dir !== null):
             ?>
-            <p><strong>Config directory:</strong> <?= \htmlentities($dir) ?></p>
+            <p><strong>Config directory:</strong> <?= D::esc($dir) ?></p>
         <?php
         endif;
         ?>
@@ -97,8 +97,8 @@ class ConfigCollector extends Collector
                             <tbody>
                             <?php foreach ($config['instances'][0]['values'] as $key => $value): ?>
                                 <tr>
-                                    <td><?= \htmlentities((string) $key) ?></td>
-                                    <td><?= \htmlentities((string) $value) ?></td>
+                                    <td><?= D::esc($key) ?></td>
+                                    <td><?= D::esc($value) ?></td>
                                 </tr>
                             <?php endforeach ?>
                             </tbody>
@@ -110,7 +110,7 @@ class ConfigCollector extends Collector
                         $found = false;
                         foreach ($this->getData() as $value) {
                             if ($value['name'] === $config['name']) {
-                                echo Debugger::roundSecondsToMilliseconds($value['end'] - $value['start']);
+                                echo D::roundSecondsToMilliseconds($value['end'] - $value['start']);
                                 $found = true;
                                 break;
                             }
@@ -136,8 +136,8 @@ class ConfigCollector extends Collector
                                 <tbody>
                                 <?php foreach ($config['instances'][$i]['values'] as $key => $value): ?>
                                     <tr>
-                                        <td><?= \htmlentities((string) $key) ?></td>
-                                        <td><?= \htmlentities((string) $value) ?></td>
+                                        <td><?= D::esc($key) ?></td>
+                                        <td><?= D::esc($value) ?></td>
                                     </tr>
                                 <?php endforeach ?>
                                 </tbody>
