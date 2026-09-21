@@ -10,7 +10,6 @@
 namespace Framework\Config\Parsers;
 
 use Closure;
-use JetBrains\PhpStorm\Pure;
 use SensitiveParameter;
 
 /**
@@ -95,7 +94,6 @@ abstract class Parser
      *
      * @return array<int|string,mixed>|bool|float|int|string|null The output value
      */
-    #[Pure]
     protected static function getValue(string $value) : array | bool | float | int | string | null
     {
         $value = \trim($value);
