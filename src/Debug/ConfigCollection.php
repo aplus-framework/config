@@ -11,6 +11,11 @@ namespace Framework\Config\Debug;
 
 use Framework\Debug\Collection;
 
+/**
+ * Class ConfigCollection.
+ *
+ * @package config
+ */
 class ConfigCollection extends Collection
 {
     protected string $iconPath = __DIR__ . '/icons/config.svg';

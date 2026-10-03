@@ -14,6 +14,11 @@ use Framework\Debug\Collector;
 use Framework\Debug\Debugger as D;
 use Framework\Helpers\ArraySimple;
 
+/**
+ * Class ConfigCollector.
+ *
+ * @package config
+ */
 class ConfigCollector extends Collector
 {
     protected Config $config;
