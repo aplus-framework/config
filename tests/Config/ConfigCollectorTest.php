@@ -11,6 +11,7 @@ namespace Tests\Config\Config;
 
 use Framework\Config\Config;
 use Framework\Config\Debug\ConfigCollector;
+use Framework\Debug\Activity;
 use PHPUnit\Framework\TestCase;
 
 final class ConfigCollectorTest extends TestCase
@@ -138,15 +139,9 @@ final class ConfigCollectorTest extends TestCase
         $this->config->setDir(__DIR__ . '/config');
         self::assertEmpty($this->collector->getActivities());
         $this->config->load('foo');
-        self::assertSame(
-            [
-                'collector',
-                'class',
-                'description',
-                'start',
-                'end',
-            ],
-            \array_keys($this->collector->getActivities()[0]) // @phpstan-ignore-line
+        self::assertInstanceOf(
+            Activity::class,
+            $this->collector->getActivities()[0] // @phpstan-ignore-line
         );
         $this->config->load('bar');
         self::assertCount(2, $this->collector->getActivities());
