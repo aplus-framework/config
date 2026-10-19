@@ -9,10 +9,10 @@
  */
 namespace Tests\Config\Parsers;
 
-use Framework\Config\Parsers\DatabaseParser;
-use Framework\Config\Parsers\ParserException;
-use Framework\Database\Database;
-use Framework\Database\Definition\Table\TableDefinition;
+use Aplus\Config\Parsers\DatabaseParser;
+use Aplus\Config\Parsers\ParserException;
+use Aplus\Database\Database;
+use Aplus\Database\Definition\Table\TableDefinition;
 
 final class DatabaseParserTest extends ParserTestCase
 {

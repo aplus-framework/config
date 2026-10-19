@@ -9,8 +9,8 @@
  */
 namespace Tests\Config\Parsers;
 
-use Framework\Config\Parsers\IniParser;
-use Framework\Config\Parsers\ParserException;
+use Aplus\Config\Parsers\IniParser;
+use Aplus\Config\Parsers\ParserException;
 
 final class IniParserTest extends ParserTestCase
 {

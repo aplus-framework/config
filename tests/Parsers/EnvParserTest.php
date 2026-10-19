@@ -9,7 +9,7 @@
  */
 namespace Tests\Config\Parsers;
 
-use Framework\Config\Parsers\EnvParser;
+use Aplus\Config\Parsers\EnvParser;
 
 final class EnvParserTest extends ParserTestCase
 {

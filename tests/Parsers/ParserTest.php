@@ -9,7 +9,7 @@
  */
 namespace Tests\Config\Parsers;
 
-use Framework\Config\Parsers\ParserException;
+use Aplus\Config\Parsers\ParserException;
 use PHPUnit\Framework\TestCase;
 
 /**

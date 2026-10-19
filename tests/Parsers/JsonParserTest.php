@@ -9,8 +9,8 @@
  */
 namespace Tests\Config\Parsers;
 
-use Framework\Config\Parsers\JsonParser;
-use Framework\Config\Parsers\ParserException;
+use Aplus\Config\Parsers\JsonParser;
+use Aplus\Config\Parsers\ParserException;
 
 final class JsonParserTest extends ParserTestCase
 {

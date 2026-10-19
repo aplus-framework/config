@@ -7,9 +7,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Framework\Config\Parsers;
+namespace Aplus\Config\Parsers;
 
-use Framework\Database\Database;
+use Aplus\Database\Database;
 use SensitiveParameter;
 
 /**

@@ -9,7 +9,7 @@
  */
 namespace Tests\Config\Parsers;
 
-use Framework\Config\Parsers\Parser;
+use Aplus\Config\Parsers\Parser;
 
 /**
  * Class ParserMock.

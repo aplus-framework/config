@@ -7,10 +7,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Framework\Config;
+namespace Aplus\Config;
 
-use Framework\Config\Debug\ConfigCollector;
-use Framework\Helpers\Isolation;
+use Aplus\Config\Debug\ConfigCollector;
+use Aplus\Helpers\Isolation;
 use LogicException;
 use SensitiveParameter;
 

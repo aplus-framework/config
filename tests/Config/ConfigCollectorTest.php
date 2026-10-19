@@ -9,9 +9,9 @@
  */
 namespace Tests\Config\Config;
 
-use Framework\Config\Config;
-use Framework\Config\Debug\ConfigCollector;
-use Framework\Debug\Activity;
+use Aplus\Config\Config;
+use Aplus\Config\Debug\ConfigCollector;
+use Aplus\Debug\Activity;
 use PHPUnit\Framework\TestCase;
 
 final class ConfigCollectorTest extends TestCase

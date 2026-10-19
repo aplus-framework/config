@@ -7,9 +7,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Framework\Config\Parsers;
+namespace Aplus\Config\Parsers;
 
-use Framework\Config\Parsers\Extra\JsonXMLElement;
+use Aplus\Config\Parsers\Extra\JsonXmlElement;
 
 /**
  * Class XmlParser.
@@ -32,7 +32,7 @@ class XmlParser extends Parser
         static::checkConfig($config);
         return static::parseOrThrow(static function () use ($config) : array {
             $config = \file_get_contents($config);
-            $config = \simplexml_load_string($config, JsonXMLElement::class); // @phpstan-ignore-line
+            $config = \simplexml_load_string($config, JsonXmlElement::class); // @phpstan-ignore-line
             $config = \json_encode($config);
             $config = \json_decode($config, true); // @phpstan-ignore-line
             $data = [];

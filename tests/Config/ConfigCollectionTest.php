@@ -9,7 +9,7 @@
  */
 namespace Tests\Config\Config;
 
-use Framework\Config\Debug\ConfigCollection;
+use Aplus\Config\Debug\ConfigCollection;
 use PHPUnit\Framework\TestCase;
 
 final class ConfigCollectionTest extends TestCase

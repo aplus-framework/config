@@ -7,13 +7,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Framework\Config\Debug;
+namespace Aplus\Config\Debug;
 
-use Framework\Config\Config;
-use Framework\Debug\Activity;
-use Framework\Debug\Collector;
-use Framework\Debug\Debugger as D;
-use Framework\Helpers\ArraySimple;
+use Aplus\Config\Config;
+use Aplus\Debug\Activity;
+use Aplus\Debug\Collector;
+use Aplus\Debug\Debugger as D;
+use Aplus\Helpers\ArraySimple;
 
 /**
  * Class ConfigCollector.

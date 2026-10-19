@@ -7,16 +7,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Framework\Config\Parsers\Extra;
+namespace Aplus\Config\Parsers\Extra;
 
 /**
- * Class JsonXMLElement.
+ * Class JsonXmlElement.
  *
- * @see \Framework\Config\Parsers\XmlParser
+ * @see \Aplus\Config\Parsers\XmlParser
  *
  * @package config
  */
-class JsonXMLElement extends \SimpleXMLElement implements \JsonSerializable
+class JsonXmlElement extends \SimpleXMLElement implements \JsonSerializable
 {
     /**
      * @return array<mixed>|string
