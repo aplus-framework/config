@@ -35,7 +35,7 @@ To instantiate the Config class, we can do as follows:
     <?php
     require __DIR__ . '/vendor/autoload.php';
 
-    use Framework\Config\Config;
+    use Aplus\Config\Config;
 
     $config = new Config();
 
@@ -263,7 +263,7 @@ and ``setMany`` methods:
 
 .. code-block:: php
 
-    use Framework\Config\Config;
+    use Aplus\Config\Config;
 
     $directory = __DIR__ . '/../configs';
     $persistence = [
@@ -285,8 +285,8 @@ configurations:
 
 .. code-block:: php
 
-    use Framework\Config\Config;
-    use Framework\Config\Parsers\EnvParser;
+    use Aplus\Config\Config;
+    use Aplus\Config\Parsers\EnvParser;
 
     $filename = __DIR__ . '/../.env';
     $configs = EnvParser::parse($filename); // array
@@ -298,8 +298,8 @@ The same can be done to set persistent configurations:
 
 .. code-block:: php
 
-    use Framework\Config\Config;
-    use Framework\Config\Parsers\EnvParser;
+    use Aplus\Config\Config;
+    use Aplus\Config\Parsers\EnvParser;
 
     $filename = __DIR__ . '/../.env';
     $configs = EnvParser::parse($filename); // array
@@ -322,7 +322,7 @@ Files of type **INI** can be parsed as shown below:
 
 .. code-block:: php
 
-    use Framework\Config\Parsers\IniParser;
+    use Aplus\Config\Parsers\IniParser;
 
     $filename = __DIR__ . '/../config.ini';
     $configs = IniParser::parse($filename); // array
@@ -348,7 +348,7 @@ Files of type **YAML** can be parsed as follows:
 
 .. code-block:: php
 
-    use Framework\Config\Parsers\YamlParser;
+    use Aplus\Config\Parsers\YamlParser;
 
     $filename = __DIR__ . '/../config.yaml';
     $configs = YamlParser::parse($filename); // array
@@ -381,7 +381,7 @@ database connection information:
 
 .. code-block:: php
 
-    use Framework\Config\Parsers\DatabaseParser;
+    use Aplus\Config\Parsers\DatabaseParser;
 
     $databaseConfigs = [
         'username' => 'dbuser'
@@ -423,8 +423,8 @@ using the Database Library:
 
 .. code-block:: php
 
-    use Framework\Database\Database;
-    use Framework\Database\Definition\Table\TableDefinition;
+    use Aplus\Database\Database;
+    use Aplus\Database\Definition\Table\TableDefinition;
 
     $username = 'dbuser';
     $password = 'p4$$30rT';
@@ -457,7 +457,7 @@ To get the configs, just use JsonParser:
 
 .. code-block:: php
 
-    use Framework\Config\Parsers\JsonParser;
+    use Aplus\Config\Parsers\JsonParser;
 
     $filename = __DIR__ . '/../config.json';
     $configs = JsonParser::parse($filename); // array
@@ -494,7 +494,7 @@ Configurations can also be stored in **XML**.
 
 .. code-block:: php
 
-    use Framework\Config\Parsers\XmlParser;
+    use Aplus\Config\Parsers\XmlParser;
 
     $filename = __DIR__ . '/../config.xml';
     $configs = XmlParser::parse($filename); // array
@@ -531,7 +531,7 @@ Also, you can use files with the **ENV** syntax:
 
 .. code-block:: php
 
-    use Framework\Config\Parsers\EnvParser;
+    use Aplus\Config\Parsers\EnvParser;
 
     $filename = __DIR__ . '/../config.env';
     $configs = EnvParser::parse($filename); // array
